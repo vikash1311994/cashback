@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashBack.Web", "CashBack.Web\CashBack.Web.csproj", "{988A66BE-6031-41E2-94A4-6DD9C9EBD711}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashBack.Tests", "CashBack.Tests\CashBack.Tests.csproj", "{188F4A61-AF1F-4A82-87D1-FFCD6968427A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{79747983-9CE2-4237-83A4-A8E99C82E921}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\AntiXssLibrary.dll = Dependencies\AntiXssLibrary.dll
+		Dependencies\HttpWebAdapters.dll = Dependencies\HttpWebAdapters.dll
+		Dependencies\Microsoft.Practices.ServiceLocation.dll = Dependencies\Microsoft.Practices.ServiceLocation.dll
+		Dependencies\Moq.dll = Dependencies\Moq.dll
+		Dependencies\Moq.pdb = Dependencies\Moq.pdb
+		Dependencies\Moq.xml = Dependencies\Moq.xml
+		Dependencies\NLog.dll = Dependencies\NLog.dll
+		Dependencies\SolrNet.dll = Dependencies\SolrNet.dll
+		Dependencies\SolrNet.DSL.dll = Dependencies\SolrNet.DSL.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{6660558B-93CB-47B8-B89A-233904B59C00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashBack.Services", "CashBack.Services\CashBack.Services.csproj", "{1E4F2834-C8B0-4C7E-8FC5-E84D90AD0EF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashBack.Data", "CashBack.Data\CashBack.Data.csproj", "{1CD1204B-75D1-45BF-8391-F955EF91757C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashBack.Crawler", "CashBack.Crawler\CashBack.Crawler.csproj", "{0B856AAD-0A54-4844-9D8D-2441E99F0C84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashBack.Indexer", "CashBack.Indexer\CashBack.Indexer.csproj", "{1A6CEFE4-B42B-4B7F-8F99-A233C25E7393}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{988A66BE-6031-41E2-94A4-6DD9C9EBD711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{988A66BE-6031-41E2-94A4-6DD9C9EBD711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{988A66BE-6031-41E2-94A4-6DD9C9EBD711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{988A66BE-6031-41E2-94A4-6DD9C9EBD711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{188F4A61-AF1F-4A82-87D1-FFCD6968427A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{188F4A61-AF1F-4A82-87D1-FFCD6968427A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{188F4A61-AF1F-4A82-87D1-FFCD6968427A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{188F4A61-AF1F-4A82-87D1-FFCD6968427A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E4F2834-C8B0-4C7E-8FC5-E84D90AD0EF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E4F2834-C8B0-4C7E-8FC5-E84D90AD0EF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E4F2834-C8B0-4C7E-8FC5-E84D90AD0EF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E4F2834-C8B0-4C7E-8FC5-E84D90AD0EF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CD1204B-75D1-45BF-8391-F955EF91757C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CD1204B-75D1-45BF-8391-F955EF91757C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CD1204B-75D1-45BF-8391-F955EF91757C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CD1204B-75D1-45BF-8391-F955EF91757C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B856AAD-0A54-4844-9D8D-2441E99F0C84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B856AAD-0A54-4844-9D8D-2441E99F0C84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B856AAD-0A54-4844-9D8D-2441E99F0C84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B856AAD-0A54-4844-9D8D-2441E99F0C84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A6CEFE4-B42B-4B7F-8F99-A233C25E7393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A6CEFE4-B42B-4B7F-8F99-A233C25E7393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A6CEFE4-B42B-4B7F-8F99-A233C25E7393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A6CEFE4-B42B-4B7F-8F99-A233C25E7393}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal

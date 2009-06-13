@@ -1,0 +1,147 @@
+﻿body {
+	background: #ffffff;
+	font: normal 62.5% "Trebuchet MS", Verdana, Helvetica, Arial,sans-serif !important;
+	color: #000000;
+	line-height: 1.4;
+	margin: 0px;
+	padding: 0px;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Trebuchet MS", Verdana, Helvetica, Arial,sans-serif !important;
+	margin: 0;
+	padding: 0;
+	letter-spacing: 0;
+	border-bottom: 0 !important;
+}
+
+a {
+	border-bottom: 0px;
+	color: #5DB0E6;
+}
+a:focus {
+	outline: 1px dotted #eee;
+}
+a:active {
+	outline: 0px;
+}
+a:hover {
+	color: #7bc4f4;
+}
+
+#siteContain {
+    width:98.7%;
+	/*width: 910px;*/
+	/*margin: 0 auto;*/
+}
+#header {
+	/*rockstar removed */
+	height: 156px;
+	padding: 0 40px;
+	position: relative;
+}
+body#header { 
+	background: none;
+	height: 186px;
+}
+
+#footer {
+background: #ffffff;
+margin-bottom: 3em;
+padding: 2.5em 40px;
+}
+
+#footer p {
+font-size: 1.2em;
+color: #fff;
+margin: .5em 0;
+line-height: 1.4;
+}
+#footer p a {
+color: #5DB0E6;
+text-decoration: underline;
+}
+
+#bottom-message {
+	position:fixed;
+	width:98.7%;
+	height:30px;
+	padding:0;
+	left:8px;
+	bottom:-2px;
+	background:transparent url(../Content/Images/bg-message.png) repeat-x;
+	border:1px solid #ccc;
+	border-bottom:0;
+	z-index:7000;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+}
+
+#bottom-message ul li {
+	float:left;
+	font-size:11px;
+	line-height:100%;
+	color:#999;
+	padding:7px 15px 0 12px;
+	margin:0;
+	height:21px;
+	background:url(../Content/Images/bg-message_dividers.png) no-repeat right top;
+}
+
+#bottom-message ul li.right {
+	float:right;
+	background-position:left top;
+	padding:7px 12px 0 15px;
+}
+
+#bottom-message ul li strong {
+	color:#666;
+}
+
+#bottom-message ul li a,#bottom-message ul li a:visited {
+	border:0;
+	color:#1566bb;
+	text-decoration:none;
+}
+
+#bottom-message ul li.icon {
+	padding:0;
+	height:28px;
+}
+
+#bottom-message ul li.icon a,#bottom-message ul li.icon a:visited {
+	display:block;
+	font-weight:bold;
+	padding:7px 15px 7px 27px;
+	text-decoration:none;
+	border:none;
+	height:16px;
+}
+
+#bottom-message ul li a#up {
+	background:url(../Content/Images/layout_header.png) center center no-repeat;
+}
+
+#bottom-message ul li a#down {
+	background:url(../Content/Images/layout_header_3_mix.png) center center no-repeat;
+}
+
+#bottom-message ul li.right.icon a,#bottom-message ul li.right.icon a:visited {
+	display:block;
+	font-weight:normal;
+	padding:7px 10px 7px 37px;
+	text-decoration:none;
+	border:none;
+	height:16px;
+}
+
+#bottom-message ul li.right.icon {
+	padding:0;
+}
+
+/* ----- clear fix for floats ----- */
+.clearfix:after { content: "."; display:block; height:0; clear:both; visibility:hidden; }
+.clearfix { display:inline-block; }		
+/* hides clearfix from IE-mac \*/
+* html .clearfix { height:1%; }
+.clearfix { display:block; }
+/* end hide from IE-mac */

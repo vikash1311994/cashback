@@ -3,26 +3,214 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+    </title>
     <link href="../../Content/reset.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
-</head>
+    <script type="text/javascript" src="../../Scripts/jquery-1.3.2.min.js"></script>
 
+    
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+        $('#cssdropdown li.headlink').hover(
+        function() { $('ul', this).css('display', 'block'); },
+        function() { $('ul', this).css('display', 'none'); });
+        });
+        
+
+
+        
+//        var preSubMenuId = null;
+//        $(document).ready(function() {
+
+//            $("#primaryNavigation ul li").hover(function() {
+//            if (preSubMenuId) {
+//                $("#" + preSubMenuId + "-dock").fadeOut('fast');
+//                }
+//                var submenu = $("#" + this.id + "-dock");
+//                if (submenu) {
+//                    submenu.fadeIn('fast');
+
+//                    preSubMenuId = this.id;
+//                }
+//                else {
+//                    preSubMenuId = null;
+//                }
+//            },function() {
+//                
+//            });
+
+//            var submenu = $("#" + this.id + "-dock");
+//            if (submenu) {
+//                submenu.hover(function() {
+//                    submenu.show();
+//                }, function() {
+//                    submenu.fadeOut('fast');
+//                });
+
+//                preSubMenuId = this.id;
+//            }
+//            else {
+//                preSubMenuId = null;
+//            }
+//            
+//        });
+
+    </script>
+
+</head>
 <body>
     <div id="siteContain">
-
         <div id="header">
-            Header
-        </div>
+            <div id="logo">
+            
+            </div>
+            <div class="fluid bar">
+                <div id="primaryNavigation">
+				<ul id="cssdropdown">
+					<li class="headlink first">
+					    <a href="#">Categories</a>
+					    <ul class="menu-dock">
+                            <table>
+                                <tr class="first">
+                                    <td class="first">
+                                        <a href="http://www.hulu.com/channels">All</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Action-and-Adventure">Action and Adventure</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Animation-and-Cartoons">Animation and Cartoons</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Comedy">Comedy</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Drama">Drama</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Family">Family</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="first">
+                                        <a href="http://www.hulu.com/channels/Food-and-Leisure">Food and Leisure</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Home-and-Garden">Home and Garden</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Horror-and-Suspense">Horror and Suspense</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Music">Music</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/News-and-Information">News and Information</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Other">Other</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="first">
+                                        <a href="http://www.hulu.com/channels/Reality-and-Game-Shows">Reality and Game Shows</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Science-Fiction">Science Fiction</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Sports">Sports</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Talk-and-Interview">Talk and Interview</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Videogames">Videogames</a>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.hulu.com/channels/Web">Web</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ul>
+					</li>
+					<li id="menu-stores"><a href="#">Stores</a></li>
+					<li id="menu-brands" class="last"><a href="#">Brands</a></li>
+					<li id="menu-help" class="right"><a href="#">Account</a></li>
+					<li id="menu-howitworks" class="right"><a href="#">Sign in</a></li>
+				</ul>
+			    </div><!-- /#primaryNavigation -->
+			    <div class="searchnav">
+			        <input type="text" name="query" id="video_search_term" value="" />
+                </div>
+            </div>
 
+            
+            
+            <div id="menu-stores-dock" class="menu-dock" style="display:none;">
+                <table>
+                    <tr class="first">
+                        <td class="first">
+                            <a href="http://www.hulu.com/channels">All</a>
+                        </td>
+                        <td>
+                            <a href="http://www.hulu.com/channels/Action-and-Adventure">Action and Adventure</a>
+                        </td>
+                        <td>
+                            <a href="http://www.hulu.com/channels/Animation-and-Cartoons">Animation and Cartoons</a>
+                        </td>
+                        <td>
+                            <a href="http://www.hulu.com/channels/Comedy">Comedy</a>
+                        </td>
+                        <td>
+                            <a href="http://www.hulu.com/channels/Drama">Drama</a>
+                        </td>
+                        <td>
+                            <a href="http://www.hulu.com/channels/Family">Family</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first">
+                            <a href="http://www.hulu.com/channels/Food-and-Leisure">Food and Leisure</a>
+                        </td>
+                        <td>
+                            <a href="http://www.hulu.com/channels/Home-and-Garden">Home and Garden</a>
+                        </td>
+                        <td>
+                            <a href="http://www.hulu.com/channels/Horror-and-Suspense">Horror and Suspense</a>
+                        </td>
+                        <td>
+                            <a href="http://www.hulu.com/channels/Music">Music</a>
+                        </td>
+                        <td>
+                            <a href="http://www.hulu.com/channels/News-and-Information">News and Information</a>
+                        </td>
+                        <td>
+                            <a href="http://www.hulu.com/channels/Other">Other</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+        </div>
         <div id="content" class="clearfix">
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div>
         <div id="footer" class="clearfix">
-            Footer
+            <div id="footerNavigation">
+				<ul>
+					<li id="footer-feedback" class="first right"><a href="#">Feedback</a></li>
+					<li id="footer-help" class="right"><a href="#">Legal</a></li>
+					<li id="footer-privacy" class="right"><a href="#">Privacy</a></li>
+					<li id="footer-copyright" class="first right"><a href="#">&copy; 2009</a></li>
+				</ul>
+			</div>
         </div>
         <div id="bottom-message">
-	    </div>
+        </div>
     </div>
 </body>
 </html>

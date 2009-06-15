@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="Content\Images\bg-message.png" />
     <Content Include="Content\Images\bg-message_dividers.png" />
+    <Content Include="Content\Images\dock_bg.gif" />
     <Content Include="Content\Images\layout_header.png" />
     <Content Include="Content\Images\layout_header_3_mix.png" />
     <Content Include="Content\reset.css" />

@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="Content\Images\bg-message.png" />
     <Content Include="Content\Images\bg-message_dividers.png" />
+    <Content Include="Content\Images\bg-top-menu.png" />
     <Content Include="Content\Images\dock_bg.gif" />
     <Content Include="Content\Images\layout_header.png" />
     <Content Include="Content\Images\layout_header_3_mix.png" />
@@ -88,6 +89,7 @@
     <Content Include="Scripts\external\qunit\testrunner.js" />
     <Content Include="Scripts\external\qunit\testsuite.css" />
     <Content Include="Scripts\external\simulate\jquery.simulate.js" />
+    <Content Include="Scripts\jquery.hoverIntent.minified.js" />
     <Content Include="Scripts\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Scripts\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
     <Content Include="Scripts\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
@@ -560,6 +562,12 @@
     <Content Include="Scripts\themes\vader\ui.slider.css" />
     <Content Include="Scripts\themes\vader\ui.tabs.css" />
     <Content Include="Scripts\themes\vader\ui.theme.css" />
+    <Content Include="Scripts\tipsy\jquery.tipsy.js" />
+    <Content Include="Scripts\tipsy\tipsy-east.gif" />
+    <Content Include="Scripts\tipsy\tipsy-north.gif" />
+    <Content Include="Scripts\tipsy\tipsy-south.gif" />
+    <Content Include="Scripts\tipsy\tipsy-west.gif" />
+    <Content Include="Scripts\tipsy\tipsy.css" />
     <Content Include="Scripts\ui\effects.blind.js" />
     <Content Include="Scripts\ui\effects.bounce.js" />
     <Content Include="Scripts\ui\effects.clip.js" />

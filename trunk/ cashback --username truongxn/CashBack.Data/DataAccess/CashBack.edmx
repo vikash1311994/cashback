@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="Products" EntityType="Models.Store.Products" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="ProductName" Type="nvarchar" Nullable="false" MaxLength="512" />
+          <Property Name="SKU" Type="nvarchar" MaxLength="64" />
+          <Property Name="ProductURL" Type="nvarchar" MaxLength="2048" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="2048" />
+          <Property Name="BuyURL" Type="nvarchar" MaxLength="2048" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="512" />
+          <Property Name="LongDescription" Type="nvarchar" MaxLength="2048" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="256" />
+          <Property Name="Keywords" Type="nvarchar" MaxLength="512" />
+          <Property Name="PartNumber" Type="nvarchar" MaxLength="64" />
+          <Property Name="ManufacturerName" Type="nvarchar" MaxLength="512" />
+          <Property Name="UPC" Type="nvarchar" MaxLength="32" />
+          <Property Name="Classification" Type="int" />
+          <Property Name="Attributes" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Discount" Type="decimal" Precision="12" Scale="4" />
+          <Property Name="DiscountType" Type="char" MaxLength="1" />
+          <Property Name="SalePrice" Type="money" />
+          <Property Name="RetailPrice" Type="money" />
+          <Property Name="BeginDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="ShippingCost" Type="money" />
+          <Property Name="ShippingInformation" Type="nvarchar" MaxLength="256" />
+          <Property Name="ShippingAvailability" Type="nvarchar" MaxLength="64" />
+          <Property Name="Currency" Type="nvarchar" MaxLength="3" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="CashBackDBEntities">
+          <EntitySet Name="ProductSet" EntityType="Models.Product" />
+        </EntityContainer>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="512" Unicode="true" FixedLength="false" />
+          <Property Name="SKU" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="ProductURL" Type="String" MaxLength="2048" Unicode="true" FixedLength="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="2048" Unicode="true" FixedLength="false" />
+          <Property Name="BuyURL" Type="String" MaxLength="2048" Unicode="true" FixedLength="false" />
+          <Property Name="ShortDescription" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
+          <Property Name="LongDescription" Type="String" MaxLength="2048" Unicode="true" FixedLength="false" />
+          <Property Name="Brand" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="Keywords" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
+          <Property Name="PartNumber" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="ManufacturerName" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
+          <Property Name="UPC" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Classification" Type="Int32" />
+          <Property Name="Attributes" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="Discount" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="DiscountType" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="SalePrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RetailPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="BeginDate" Type="DateTime" />
+          <Property Name="EndDate" Type="DateTime" />
+          <Property Name="ShippingCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ShippingInformation" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="ShippingAvailability" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="Currency" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="CashBackDBEntities">
+          <EntitySetMapping Name="ProductSet">
+            <EntityTypeMapping TypeName="IsTypeOf(Models.Product)">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="ProductURL" ColumnName="ProductURL" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="BuyURL" ColumnName="BuyURL" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+                <ScalarProperty Name="ManufacturerName" ColumnName="ManufacturerName" />
+                <ScalarProperty Name="UPC" ColumnName="UPC" />
+                <ScalarProperty Name="Classification" ColumnName="Classification" />
+                <ScalarProperty Name="Attributes" ColumnName="Attributes" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+                <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ShippingCost" ColumnName="ShippingCost" />
+                <ScalarProperty Name="ShippingInformation" ColumnName="ShippingInformation" />
+                <ScalarProperty Name="ShippingAvailability" ColumnName="ShippingAvailability" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="CashBack" ZoomLevel="77">
+        <EntityTypeShape EntityType="Models.Product" Width="1.5" PointX="0.75" PointY="0.75" Height="6.21091796875" IsExpanded="true" /></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -67,6 +67,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\CashBackDB.mdf">
+    </Content>
+    <Content Include="App_Data\CashBackDB_log.ldf">
+      <DependentUpon>CashBackDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\Images\bg-message.png" />
     <Content Include="Content\Images\bg-message_dividers.png" />
     <Content Include="Content\Images\bg-top-menu.png" />
@@ -730,7 +735,6 @@
     <None Include="Scripts\external\cookie\jquery.cookie.zip" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

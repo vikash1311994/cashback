@@ -19,5 +19,16 @@ namespace CashBack.Data
 
             return categories;
         }
+
+        public IEnumerable<Product> GetIndexProducts(DateTime lastModified)
+        {
+            int activeCode = StatusEnum.Active.GetHashCode();
+
+            var products = (from p in db.ProductSet
+                            where p.Status == activeCode && p.ModifiedDate >= lastModified
+                            select p).ToList();
+
+            return products;
+        }
     }
 }

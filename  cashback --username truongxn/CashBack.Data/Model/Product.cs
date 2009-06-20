@@ -11,6 +11,12 @@ namespace CashBack.Data
         Archive = 2
     }
 
+    public enum ProgramEnum
+    {
+        LinkShare,
+        CommissionJunction
+    }
+
     public partial class Product
     {
         

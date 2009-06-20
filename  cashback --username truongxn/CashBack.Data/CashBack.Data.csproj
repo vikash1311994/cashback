@@ -63,13 +63,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="DataAccess\CashBack.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CashBack.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>CashBack.Data</CustomToolNamespace>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

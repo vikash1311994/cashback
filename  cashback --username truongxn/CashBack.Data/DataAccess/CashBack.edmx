@@ -6,8 +6,84 @@
     <edmx:StorageModels>
       <Schema Namespace="Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
         <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="Brands" EntityType="Models.Store.Brands" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Categories" EntityType="Models.Store.Categories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CategoryMappings" EntityType="Models.Store.CategoryMappings" store:Type="Tables" store:Schema="dbo" store:Name="CategoryMappings">
+            <DefiningQuery>SELECT 
+      [CategoryMappings].[CategoryID] AS [CategoryID], 
+      [CategoryMappings].[ReferenceCategoryID] AS [ReferenceCategoryID], 
+      [CategoryMappings].[Program] AS [Program]
+      FROM [dbo].[CategoryMappings] AS [CategoryMappings]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProductCategories" EntityType="Models.Store.ProductCategories" store:Type="Tables" store:Schema="dbo" store:Name="ProductCategories">
+            <DefiningQuery>SELECT 
+      [ProductCategories].[CategoryID] AS [CategoryID], 
+      [ProductCategories].[ProductID] AS [ProductID], 
+      [ProductCategories].[Type] AS [Type]
+      FROM [dbo].[ProductCategories] AS [ProductCategories]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Products" EntityType="Models.Store.Products" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Stores" EntityType="Models.Store.Stores" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CategoryMappings_Categories" Association="Models.Store.FK_CategoryMappings_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="CategoryMappings" EntitySet="CategoryMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCategories_Categories" Association="Models.Store.FK_ProductCategories_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="ProductCategories" EntitySet="ProductCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCategories_Products" Association="Models.Store.FK_ProductCategories_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductCategories" EntitySet="ProductCategories" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Brands">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BrandID" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="BrandName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="BrandURL" Type="nvarchar" MaxLength="2000" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Program" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'C:\PROJECTS\CASHBACK\CASHBACK.WEB\APP_DATA\CASHBACKDB.MDF.dbo.CategoryMappings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="CategoryMappings">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="ReferenceCategoryID" />
+            <PropertyRef Name="Program" />
+          </Key>
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="ReferenceCategoryID" Type="int" Nullable="false" />
+          <Property Name="Program" Type="nvarchar" Nullable="false" MaxLength="128" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'C:\PROJECTS\CASHBACK\CASHBACK.WEB\APP_DATA\CASHBACKDB.MDF.dbo.ProductCategories' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="ProductCategories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="ID" />
@@ -38,16 +114,127 @@
           <Property Name="ShippingInformation" Type="nvarchar" MaxLength="256" />
           <Property Name="ShippingAvailability" Type="nvarchar" MaxLength="64" />
           <Property Name="Currency" Type="nvarchar" MaxLength="3" />
-          <Property Name="Status" Type="bit" />
+          <Property Name="Status" Type="int" />
         </EntityType>
+        <EntityType Name="Stores">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StoreName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="StoreID" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="StoreURL" Type="nvarchar" MaxLength="2000" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Program" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CategoryMappings_Categories">
+          <End Role="Categories" Type="Models.Store.Categories" Multiplicity="1" />
+          <End Role="CategoryMappings" Type="Models.Store.CategoryMappings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="CategoryMappings">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCategories_Categories">
+          <End Role="Categories" Type="Models.Store.Categories" Multiplicity="1" />
+          <End Role="ProductCategories" Type="Models.Store.ProductCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="ProductCategories">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCategories_Products">
+          <End Role="Products" Type="Models.Store.Products" Multiplicity="1" />
+          <End Role="ProductCategories" Type="Models.Store.ProductCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductCategories">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Models" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
         <EntityContainer Name="CashBackDBEntities">
+          <EntitySet Name="BrandSet" EntityType="Models.Brand" />
+          <EntitySet Name="CategorySet" EntityType="Models.Category" />
+          <EntitySet Name="CategoryMappingSet" EntityType="Models.CategoryMapping" />
+          <EntitySet Name="ProductCategorySet" EntityType="Models.ProductCategory" />
           <EntitySet Name="ProductSet" EntityType="Models.Product" />
+          <EntitySet Name="StoreSet" EntityType="Models.Store" />
+          <AssociationSet Name="FK_CategoryMappings_Categories" Association="Models.FK_CategoryMappings_Categories">
+            <End Role="Categories" EntitySet="CategorySet" />
+            <End Role="CategoryMappings" EntitySet="CategoryMappingSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCategories_Categories" Association="Models.FK_ProductCategories_Categories">
+            <End Role="Categories" EntitySet="CategorySet" />
+            <End Role="ProductCategories" EntitySet="ProductCategorySet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCategories_Products" Association="Models.FK_ProductCategories_Products">
+            <End Role="Products" EntitySet="ProductSet" />
+            <End Role="ProductCategories" EntitySet="ProductCategorySet" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="BrandID" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="BrandName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="BrandURL" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="Program" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CategoryMappings" Relationship="Models.FK_CategoryMappings_Categories" FromRole="Categories" ToRole="CategoryMappings" />
+          <NavigationProperty Name="ProductCategories" Relationship="Models.FK_ProductCategories_Categories" FromRole="Categories" ToRole="ProductCategories" />
+        </EntityType>
+        <EntityType Name="CategoryMapping">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="ReferenceCategoryID" />
+            <PropertyRef Name="Program" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="ReferenceCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Program" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Categories" Relationship="Models.FK_CategoryMappings_Categories" FromRole="CategoryMappings" ToRole="Categories" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categories" Relationship="Models.FK_ProductCategories_Categories" FromRole="ProductCategories" ToRole="Categories" />
+          <NavigationProperty Name="Products" Relationship="Models.FK_ProductCategories_Products" FromRole="ProductCategories" ToRole="Products" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ID" />
@@ -78,14 +265,104 @@
           <Property Name="ShippingInformation" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
           <Property Name="ShippingAvailability" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
           <Property Name="Currency" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
-          <Property Name="Status" Type="Boolean" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="ProductCategories" Relationship="Models.FK_ProductCategories_Products" FromRole="Products" ToRole="ProductCategories" />
         </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="StoreName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="StoreID" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="StoreURL" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="Program" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CategoryMappings_Categories">
+          <End Role="Categories" Type="Models.Category" Multiplicity="1" />
+          <End Role="CategoryMappings" Type="Models.CategoryMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="CategoryMappings">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCategories_Categories">
+          <End Role="Categories" Type="Models.Category" Multiplicity="1" />
+          <End Role="ProductCategories" Type="Models.ProductCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="ProductCategories">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCategories_Products">
+          <End Role="Products" Type="Models.Product" Multiplicity="1" />
+          <End Role="ProductCategories" Type="Models.ProductCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductCategories">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
         <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="CashBackDBEntities">
+          <EntitySetMapping Name="BrandSet">
+            <EntityTypeMapping TypeName="IsTypeOf(Models.Brand)">
+              <MappingFragment StoreEntitySet="Brands">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="BrandURL" ColumnName="BrandURL" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategorySet">
+            <EntityTypeMapping TypeName="IsTypeOf(Models.Category)">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryMappingSet">
+            <EntityTypeMapping TypeName="IsTypeOf(Models.CategoryMapping)">
+              <MappingFragment StoreEntitySet="CategoryMappings">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ReferenceCategoryID" ColumnName="ReferenceCategoryID" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategorySet">
+            <EntityTypeMapping TypeName="IsTypeOf(Models.ProductCategory)">
+              <MappingFragment StoreEntitySet="ProductCategories">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProductSet">
             <EntityTypeMapping TypeName="IsTypeOf(Models.Product)">
               <MappingFragment StoreEntitySet="Products">
@@ -119,6 +396,49 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="StoreSet">
+            <EntityTypeMapping TypeName="IsTypeOf(Models.Store)">
+              <MappingFragment StoreEntitySet="Stores">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="StoreURL" ColumnName="StoreURL" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_CategoryMappings_Categories" TypeName="Models.FK_CategoryMappings_Categories" StoreEntitySet="CategoryMappings">
+            <EndProperty Name="Categories">
+              <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+            </EndProperty>
+            <EndProperty Name="CategoryMappings">
+              <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              <ScalarProperty Name="ReferenceCategoryID" ColumnName="ReferenceCategoryID" />
+              <ScalarProperty Name="Program" ColumnName="Program" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_ProductCategories_Categories" TypeName="Models.FK_ProductCategories_Categories" StoreEntitySet="ProductCategories">
+            <EndProperty Name="Categories">
+              <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+            </EndProperty>
+            <EndProperty Name="ProductCategories">
+              <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              <ScalarProperty Name="Type" ColumnName="Type" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_ProductCategories_Products" TypeName="Models.FK_ProductCategories_Products" StoreEntitySet="ProductCategories">
+            <EndProperty Name="Products">
+              <ScalarProperty Name="ID" ColumnName="ProductID" />
+            </EndProperty>
+            <EndProperty Name="ProductCategories">
+              <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              <ScalarProperty Name="Type" ColumnName="Type" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -137,7 +457,27 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="CashBack" ZoomLevel="77">
-        <EntityTypeShape EntityType="Models.Product" Width="1.5" PointX="0.75" PointY="0.75" Height="6.21091796875" IsExpanded="true" /></Diagram></edmx:Diagrams>
+      <Diagram Name="CashBack" ZoomLevel="43">
+        <EntityTypeShape EntityType="Models.Brand" Width="1.5" PointX="5.75" PointY="2.125" Height="2.3648893229166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Category" Width="1.5" PointX="0.75" PointY="3.625" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.CategoryMapping" Width="1.5" PointX="3" PointY="3.875" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.ProductCategory" Width="1.5" PointX="3" PointY="0.75" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Product" Width="1.5" PointX="0.75" PointY="8.875" Height="6.4032194010416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Store" Width="1.5" PointX="2.75" PointY="7.125" Height="2.3648893229166674" IsExpanded="true" />
+        <AssociationConnector Association="Models.FK_CategoryMappings_Categories" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.7689925130208337" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="4.7689925130208328" />
+          <ConnectorPoint PointX="2.5833333333333335" PointY="4.7689925130208337" />
+          <ConnectorPoint PointX="3" PointY="4.7689925130208337" /></AssociationConnector>
+        <AssociationConnector Association="Models.FK_ProductCategories_Categories" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="3.625" />
+          <ConnectorPoint PointX="1.5" PointY="1.7401432291666668" />
+          <ConnectorPoint PointX="3" PointY="1.7401432291666668" /></AssociationConnector>
+        <AssociationConnector Association="Models.FK_ProductCategories_Products" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="8.875" />
+          <ConnectorPoint PointX="1.5" PointY="6.047587890625" />
+          <ConnectorPoint PointX="2.5" PointY="6.047587890625" />
+          <ConnectorPoint PointX="2.5" PointY="2.26646684375" />
+          <ConnectorPoint PointX="3" PointY="2.26646684375" /></AssociationConnector></Diagram></edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

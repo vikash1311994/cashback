@@ -9,9 +9,12 @@
 //------------------------------------------------------------------------------
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Models", "FK_CategoryMappings_Categories", "Categories", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CashBack.Data.Category), "CategoryMappings", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CashBack.Data.CategoryMapping))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Models", "FK_ProductCategories_Categories", "Categories", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CashBack.Data.Category), "ProductCategories", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CashBack.Data.ProductCategory))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Models", "FK_ProductCategories_Products", "Products", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CashBack.Data.Product), "ProductCategories", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CashBack.Data.ProductCategory))]
 
 // Original file name:
-// Generation date: 6/17/2009 10:41:18 PM
+// Generation date: 6/19/2009 7:50:57 PM
 namespace CashBack.Data
 {
     
@@ -46,6 +49,66 @@ namespace CashBack.Data
         }
         partial void OnContextCreated();
         /// <summary>
+        /// There are no comments for BrandSet in the schema.
+        /// </summary>
+        public global::System.Data.Objects.ObjectQuery<Brand> BrandSet
+        {
+            get
+            {
+                if ((this._BrandSet == null))
+                {
+                    this._BrandSet = base.CreateQuery<Brand>("[BrandSet]");
+                }
+                return this._BrandSet;
+            }
+        }
+        private global::System.Data.Objects.ObjectQuery<Brand> _BrandSet;
+        /// <summary>
+        /// There are no comments for CategorySet in the schema.
+        /// </summary>
+        public global::System.Data.Objects.ObjectQuery<Category> CategorySet
+        {
+            get
+            {
+                if ((this._CategorySet == null))
+                {
+                    this._CategorySet = base.CreateQuery<Category>("[CategorySet]");
+                }
+                return this._CategorySet;
+            }
+        }
+        private global::System.Data.Objects.ObjectQuery<Category> _CategorySet;
+        /// <summary>
+        /// There are no comments for CategoryMappingSet in the schema.
+        /// </summary>
+        public global::System.Data.Objects.ObjectQuery<CategoryMapping> CategoryMappingSet
+        {
+            get
+            {
+                if ((this._CategoryMappingSet == null))
+                {
+                    this._CategoryMappingSet = base.CreateQuery<CategoryMapping>("[CategoryMappingSet]");
+                }
+                return this._CategoryMappingSet;
+            }
+        }
+        private global::System.Data.Objects.ObjectQuery<CategoryMapping> _CategoryMappingSet;
+        /// <summary>
+        /// There are no comments for ProductCategorySet in the schema.
+        /// </summary>
+        public global::System.Data.Objects.ObjectQuery<ProductCategory> ProductCategorySet
+        {
+            get
+            {
+                if ((this._ProductCategorySet == null))
+                {
+                    this._ProductCategorySet = base.CreateQuery<ProductCategory>("[ProductCategorySet]");
+                }
+                return this._ProductCategorySet;
+            }
+        }
+        private global::System.Data.Objects.ObjectQuery<ProductCategory> _ProductCategorySet;
+        /// <summary>
         /// There are no comments for ProductSet in the schema.
         /// </summary>
         public global::System.Data.Objects.ObjectQuery<Product> ProductSet
@@ -61,11 +124,717 @@ namespace CashBack.Data
         }
         private global::System.Data.Objects.ObjectQuery<Product> _ProductSet;
         /// <summary>
+        /// There are no comments for StoreSet in the schema.
+        /// </summary>
+        public global::System.Data.Objects.ObjectQuery<Store> StoreSet
+        {
+            get
+            {
+                if ((this._StoreSet == null))
+                {
+                    this._StoreSet = base.CreateQuery<Store>("[StoreSet]");
+                }
+                return this._StoreSet;
+            }
+        }
+        private global::System.Data.Objects.ObjectQuery<Store> _StoreSet;
+        /// <summary>
+        /// There are no comments for BrandSet in the schema.
+        /// </summary>
+        public void AddToBrandSet(Brand brand)
+        {
+            base.AddObject("BrandSet", brand);
+        }
+        /// <summary>
+        /// There are no comments for CategorySet in the schema.
+        /// </summary>
+        public void AddToCategorySet(Category category)
+        {
+            base.AddObject("CategorySet", category);
+        }
+        /// <summary>
+        /// There are no comments for CategoryMappingSet in the schema.
+        /// </summary>
+        public void AddToCategoryMappingSet(CategoryMapping categoryMapping)
+        {
+            base.AddObject("CategoryMappingSet", categoryMapping);
+        }
+        /// <summary>
+        /// There are no comments for ProductCategorySet in the schema.
+        /// </summary>
+        public void AddToProductCategorySet(ProductCategory productCategory)
+        {
+            base.AddObject("ProductCategorySet", productCategory);
+        }
+        /// <summary>
         /// There are no comments for ProductSet in the schema.
         /// </summary>
         public void AddToProductSet(Product product)
         {
             base.AddObject("ProductSet", product);
+        }
+        /// <summary>
+        /// There are no comments for StoreSet in the schema.
+        /// </summary>
+        public void AddToStoreSet(Store store)
+        {
+            base.AddObject("StoreSet", store);
+        }
+    }
+    /// <summary>
+    /// There are no comments for Models.Brand in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="Models", Name="Brand")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class Brand : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Create a new Brand object.
+        /// </summary>
+        /// <param name="id">Initial value of ID.</param>
+        /// <param name="brandID">Initial value of BrandID.</param>
+        /// <param name="brandName">Initial value of BrandName.</param>
+        /// <param name="program">Initial value of Program.</param>
+        /// <param name="status">Initial value of Status.</param>
+        public static Brand CreateBrand(int id, string brandID, string brandName, string program, int status)
+        {
+            Brand brand = new Brand();
+            brand.ID = id;
+            brand.BrandID = brandID;
+            brand.BrandName = brandName;
+            brand.Program = program;
+            brand.Status = status;
+            return brand;
+        }
+        /// <summary>
+        /// There are no comments for Property ID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.OnIDChanging(value);
+                this.ReportPropertyChanging("ID");
+                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID");
+                this.OnIDChanged();
+            }
+        }
+        private int _ID;
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+        /// <summary>
+        /// There are no comments for Property BrandID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string BrandID
+        {
+            get
+            {
+                return this._BrandID;
+            }
+            set
+            {
+                this.OnBrandIDChanging(value);
+                this.ReportPropertyChanging("BrandID");
+                this._BrandID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("BrandID");
+                this.OnBrandIDChanged();
+            }
+        }
+        private string _BrandID;
+        partial void OnBrandIDChanging(string value);
+        partial void OnBrandIDChanged();
+        /// <summary>
+        /// There are no comments for Property BrandName in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string BrandName
+        {
+            get
+            {
+                return this._BrandName;
+            }
+            set
+            {
+                this.OnBrandNameChanging(value);
+                this.ReportPropertyChanging("BrandName");
+                this._BrandName = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("BrandName");
+                this.OnBrandNameChanged();
+            }
+        }
+        private string _BrandName;
+        partial void OnBrandNameChanging(string value);
+        partial void OnBrandNameChanged();
+        /// <summary>
+        /// There are no comments for Property BrandURL in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string BrandURL
+        {
+            get
+            {
+                return this._BrandURL;
+            }
+            set
+            {
+                this.OnBrandURLChanging(value);
+                this.ReportPropertyChanging("BrandURL");
+                this._BrandURL = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("BrandURL");
+                this.OnBrandURLChanged();
+            }
+        }
+        private string _BrandURL;
+        partial void OnBrandURLChanging(string value);
+        partial void OnBrandURLChanged();
+        /// <summary>
+        /// There are no comments for Property ImageURL in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string ImageURL
+        {
+            get
+            {
+                return this._ImageURL;
+            }
+            set
+            {
+                this.OnImageURLChanging(value);
+                this.ReportPropertyChanging("ImageURL");
+                this._ImageURL = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("ImageURL");
+                this.OnImageURLChanged();
+            }
+        }
+        private string _ImageURL;
+        partial void OnImageURLChanging(string value);
+        partial void OnImageURLChanged();
+        /// <summary>
+        /// There are no comments for Property Program in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string Program
+        {
+            get
+            {
+                return this._Program;
+            }
+            set
+            {
+                this.OnProgramChanging(value);
+                this.ReportPropertyChanging("Program");
+                this._Program = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("Program");
+                this.OnProgramChanged();
+            }
+        }
+        private string _Program;
+        partial void OnProgramChanging(string value);
+        partial void OnProgramChanged();
+        /// <summary>
+        /// There are no comments for Property Status in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int Status
+        {
+            get
+            {
+                return this._Status;
+            }
+            set
+            {
+                this.OnStatusChanging(value);
+                this.ReportPropertyChanging("Status");
+                this._Status = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("Status");
+                this.OnStatusChanged();
+            }
+        }
+        private int _Status;
+        partial void OnStatusChanging(int value);
+        partial void OnStatusChanged();
+    }
+    /// <summary>
+    /// There are no comments for Models.Category in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// CategoryID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="Models", Name="Category")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class Category : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Create a new Category object.
+        /// </summary>
+        /// <param name="categoryID">Initial value of CategoryID.</param>
+        /// <param name="categoryName">Initial value of CategoryName.</param>
+        /// <param name="status">Initial value of Status.</param>
+        public static Category CreateCategory(int categoryID, string categoryName, int status)
+        {
+            Category category = new Category();
+            category.CategoryID = categoryID;
+            category.CategoryName = categoryName;
+            category.Status = status;
+            return category;
+        }
+        /// <summary>
+        /// There are no comments for Property CategoryID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int CategoryID
+        {
+            get
+            {
+                return this._CategoryID;
+            }
+            set
+            {
+                this.OnCategoryIDChanging(value);
+                this.ReportPropertyChanging("CategoryID");
+                this._CategoryID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("CategoryID");
+                this.OnCategoryIDChanged();
+            }
+        }
+        private int _CategoryID;
+        partial void OnCategoryIDChanging(int value);
+        partial void OnCategoryIDChanged();
+        /// <summary>
+        /// There are no comments for Property CategoryName in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string CategoryName
+        {
+            get
+            {
+                return this._CategoryName;
+            }
+            set
+            {
+                this.OnCategoryNameChanging(value);
+                this.ReportPropertyChanging("CategoryName");
+                this._CategoryName = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("CategoryName");
+                this.OnCategoryNameChanged();
+            }
+        }
+        private string _CategoryName;
+        partial void OnCategoryNameChanging(string value);
+        partial void OnCategoryNameChanged();
+        /// <summary>
+        /// There are no comments for Property ParentID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Nullable<int> ParentID
+        {
+            get
+            {
+                return this._ParentID;
+            }
+            set
+            {
+                this.OnParentIDChanging(value);
+                this.ReportPropertyChanging("ParentID");
+                this._ParentID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ParentID");
+                this.OnParentIDChanged();
+            }
+        }
+        private global::System.Nullable<int> _ParentID;
+        partial void OnParentIDChanging(global::System.Nullable<int> value);
+        partial void OnParentIDChanged();
+        /// <summary>
+        /// There are no comments for Property Status in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int Status
+        {
+            get
+            {
+                return this._Status;
+            }
+            set
+            {
+                this.OnStatusChanging(value);
+                this.ReportPropertyChanging("Status");
+                this._Status = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("Status");
+                this.OnStatusChanged();
+            }
+        }
+        private int _Status;
+        partial void OnStatusChanging(int value);
+        partial void OnStatusChanged();
+        /// <summary>
+        /// There are no comments for CategoryMappings in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("Models", "FK_CategoryMappings_Categories", "CategoryMappings")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CategoryMapping> CategoryMappings
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CategoryMapping>("Models.FK_CategoryMappings_Categories", "CategoryMappings");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CategoryMapping>("Models.FK_CategoryMappings_Categories", "CategoryMappings", value);
+                }
+            }
+        }
+        /// <summary>
+        /// There are no comments for ProductCategories in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("Models", "FK_ProductCategories_Categories", "ProductCategories")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<ProductCategory> ProductCategories
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<ProductCategory>("Models.FK_ProductCategories_Categories", "ProductCategories");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<ProductCategory>("Models.FK_ProductCategories_Categories", "ProductCategories", value);
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// There are no comments for Models.CategoryMapping in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// CategoryID
+    /// ReferenceCategoryID
+    /// Program
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="Models", Name="CategoryMapping")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class CategoryMapping : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Create a new CategoryMapping object.
+        /// </summary>
+        /// <param name="categoryID">Initial value of CategoryID.</param>
+        /// <param name="referenceCategoryID">Initial value of ReferenceCategoryID.</param>
+        /// <param name="program">Initial value of Program.</param>
+        public static CategoryMapping CreateCategoryMapping(int categoryID, int referenceCategoryID, string program)
+        {
+            CategoryMapping categoryMapping = new CategoryMapping();
+            categoryMapping.CategoryID = categoryID;
+            categoryMapping.ReferenceCategoryID = referenceCategoryID;
+            categoryMapping.Program = program;
+            return categoryMapping;
+        }
+        /// <summary>
+        /// There are no comments for Property CategoryID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int CategoryID
+        {
+            get
+            {
+                return this._CategoryID;
+            }
+            set
+            {
+                this.OnCategoryIDChanging(value);
+                this.ReportPropertyChanging("CategoryID");
+                this._CategoryID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("CategoryID");
+                this.OnCategoryIDChanged();
+            }
+        }
+        private int _CategoryID;
+        partial void OnCategoryIDChanging(int value);
+        partial void OnCategoryIDChanged();
+        /// <summary>
+        /// There are no comments for Property ReferenceCategoryID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int ReferenceCategoryID
+        {
+            get
+            {
+                return this._ReferenceCategoryID;
+            }
+            set
+            {
+                this.OnReferenceCategoryIDChanging(value);
+                this.ReportPropertyChanging("ReferenceCategoryID");
+                this._ReferenceCategoryID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ReferenceCategoryID");
+                this.OnReferenceCategoryIDChanged();
+            }
+        }
+        private int _ReferenceCategoryID;
+        partial void OnReferenceCategoryIDChanging(int value);
+        partial void OnReferenceCategoryIDChanged();
+        /// <summary>
+        /// There are no comments for Property Program in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string Program
+        {
+            get
+            {
+                return this._Program;
+            }
+            set
+            {
+                this.OnProgramChanging(value);
+                this.ReportPropertyChanging("Program");
+                this._Program = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("Program");
+                this.OnProgramChanged();
+            }
+        }
+        private string _Program;
+        partial void OnProgramChanging(string value);
+        partial void OnProgramChanged();
+        /// <summary>
+        /// There are no comments for Categories in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("Models", "FK_CategoryMappings_Categories", "Categories")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public Category Categories
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Category>("Models.FK_CategoryMappings_Categories", "Categories").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Category>("Models.FK_CategoryMappings_Categories", "Categories").Value = value;
+            }
+        }
+        /// <summary>
+        /// There are no comments for Categories in the schema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<Category> CategoriesReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Category>("Models.FK_CategoryMappings_Categories", "Categories");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Category>("Models.FK_CategoryMappings_Categories", "Categories", value);
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// There are no comments for Models.ProductCategory in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// CategoryID
+    /// ProductID
+    /// Type
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="Models", Name="ProductCategory")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class ProductCategory : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Create a new ProductCategory object.
+        /// </summary>
+        /// <param name="categoryID">Initial value of CategoryID.</param>
+        /// <param name="productID">Initial value of ProductID.</param>
+        /// <param name="type">Initial value of Type.</param>
+        public static ProductCategory CreateProductCategory(int categoryID, int productID, int type)
+        {
+            ProductCategory productCategory = new ProductCategory();
+            productCategory.CategoryID = categoryID;
+            productCategory.ProductID = productID;
+            productCategory.Type = type;
+            return productCategory;
+        }
+        /// <summary>
+        /// There are no comments for Property CategoryID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int CategoryID
+        {
+            get
+            {
+                return this._CategoryID;
+            }
+            set
+            {
+                this.OnCategoryIDChanging(value);
+                this.ReportPropertyChanging("CategoryID");
+                this._CategoryID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("CategoryID");
+                this.OnCategoryIDChanged();
+            }
+        }
+        private int _CategoryID;
+        partial void OnCategoryIDChanging(int value);
+        partial void OnCategoryIDChanged();
+        /// <summary>
+        /// There are no comments for Property ProductID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int ProductID
+        {
+            get
+            {
+                return this._ProductID;
+            }
+            set
+            {
+                this.OnProductIDChanging(value);
+                this.ReportPropertyChanging("ProductID");
+                this._ProductID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ProductID");
+                this.OnProductIDChanged();
+            }
+        }
+        private int _ProductID;
+        partial void OnProductIDChanging(int value);
+        partial void OnProductIDChanged();
+        /// <summary>
+        /// There are no comments for Property Type in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int Type
+        {
+            get
+            {
+                return this._Type;
+            }
+            set
+            {
+                this.OnTypeChanging(value);
+                this.ReportPropertyChanging("Type");
+                this._Type = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("Type");
+                this.OnTypeChanged();
+            }
+        }
+        private int _Type;
+        partial void OnTypeChanging(int value);
+        partial void OnTypeChanged();
+        /// <summary>
+        /// There are no comments for Categories in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("Models", "FK_ProductCategories_Categories", "Categories")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public Category Categories
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Category>("Models.FK_ProductCategories_Categories", "Categories").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Category>("Models.FK_ProductCategories_Categories", "Categories").Value = value;
+            }
+        }
+        /// <summary>
+        /// There are no comments for Categories in the schema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<Category> CategoriesReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Category>("Models.FK_ProductCategories_Categories", "Categories");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Category>("Models.FK_ProductCategories_Categories", "Categories", value);
+                }
+            }
+        }
+        /// <summary>
+        /// There are no comments for Products in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("Models", "FK_ProductCategories_Products", "Products")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public Product Products
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Product>("Models.FK_ProductCategories_Products", "Products").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Product>("Models.FK_ProductCategories_Products", "Products").Value = value;
+            }
+        }
+        /// <summary>
+        /// There are no comments for Products in the schema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<Product> ProductsReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Product>("Models.FK_ProductCategories_Products", "Products");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Product>("Models.FK_ProductCategories_Products", "Products", value);
+                }
+            }
         }
     }
     /// <summary>
@@ -696,7 +1465,7 @@ namespace CashBack.Data
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Nullable<bool> Status
+        public global::System.Nullable<int> Status
         {
             get
             {
@@ -711,8 +1480,220 @@ namespace CashBack.Data
                 this.OnStatusChanged();
             }
         }
-        private global::System.Nullable<bool> _Status;
-        partial void OnStatusChanging(global::System.Nullable<bool> value);
+        private global::System.Nullable<int> _Status;
+        partial void OnStatusChanging(global::System.Nullable<int> value);
+        partial void OnStatusChanged();
+        /// <summary>
+        /// There are no comments for ProductCategories in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("Models", "FK_ProductCategories_Products", "ProductCategories")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<ProductCategory> ProductCategories
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<ProductCategory>("Models.FK_ProductCategories_Products", "ProductCategories");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<ProductCategory>("Models.FK_ProductCategories_Products", "ProductCategories", value);
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// There are no comments for Models.Store in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="Models", Name="Store")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class Store : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Create a new Store object.
+        /// </summary>
+        /// <param name="id">Initial value of ID.</param>
+        /// <param name="storeName">Initial value of StoreName.</param>
+        /// <param name="storeID">Initial value of StoreID.</param>
+        /// <param name="program">Initial value of Program.</param>
+        /// <param name="status">Initial value of Status.</param>
+        public static Store CreateStore(int id, string storeName, string storeID, string program, int status)
+        {
+            Store store = new Store();
+            store.ID = id;
+            store.StoreName = storeName;
+            store.StoreID = storeID;
+            store.Program = program;
+            store.Status = status;
+            return store;
+        }
+        /// <summary>
+        /// There are no comments for Property ID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.OnIDChanging(value);
+                this.ReportPropertyChanging("ID");
+                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID");
+                this.OnIDChanged();
+            }
+        }
+        private int _ID;
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+        /// <summary>
+        /// There are no comments for Property StoreName in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string StoreName
+        {
+            get
+            {
+                return this._StoreName;
+            }
+            set
+            {
+                this.OnStoreNameChanging(value);
+                this.ReportPropertyChanging("StoreName");
+                this._StoreName = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("StoreName");
+                this.OnStoreNameChanged();
+            }
+        }
+        private string _StoreName;
+        partial void OnStoreNameChanging(string value);
+        partial void OnStoreNameChanged();
+        /// <summary>
+        /// There are no comments for Property StoreID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string StoreID
+        {
+            get
+            {
+                return this._StoreID;
+            }
+            set
+            {
+                this.OnStoreIDChanging(value);
+                this.ReportPropertyChanging("StoreID");
+                this._StoreID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("StoreID");
+                this.OnStoreIDChanged();
+            }
+        }
+        private string _StoreID;
+        partial void OnStoreIDChanging(string value);
+        partial void OnStoreIDChanged();
+        /// <summary>
+        /// There are no comments for Property StoreURL in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string StoreURL
+        {
+            get
+            {
+                return this._StoreURL;
+            }
+            set
+            {
+                this.OnStoreURLChanging(value);
+                this.ReportPropertyChanging("StoreURL");
+                this._StoreURL = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("StoreURL");
+                this.OnStoreURLChanged();
+            }
+        }
+        private string _StoreURL;
+        partial void OnStoreURLChanging(string value);
+        partial void OnStoreURLChanged();
+        /// <summary>
+        /// There are no comments for Property ImageURL in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string ImageURL
+        {
+            get
+            {
+                return this._ImageURL;
+            }
+            set
+            {
+                this.OnImageURLChanging(value);
+                this.ReportPropertyChanging("ImageURL");
+                this._ImageURL = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("ImageURL");
+                this.OnImageURLChanged();
+            }
+        }
+        private string _ImageURL;
+        partial void OnImageURLChanging(string value);
+        partial void OnImageURLChanged();
+        /// <summary>
+        /// There are no comments for Property Program in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string Program
+        {
+            get
+            {
+                return this._Program;
+            }
+            set
+            {
+                this.OnProgramChanging(value);
+                this.ReportPropertyChanging("Program");
+                this._Program = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("Program");
+                this.OnProgramChanged();
+            }
+        }
+        private string _Program;
+        partial void OnProgramChanging(string value);
+        partial void OnProgramChanged();
+        /// <summary>
+        /// There are no comments for Property Status in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int Status
+        {
+            get
+            {
+                return this._Status;
+            }
+            set
+            {
+                this.OnStatusChanging(value);
+                this.ReportPropertyChanging("Status");
+                this._Status = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("Status");
+                this.OnStatusChanged();
+            }
+        }
+        private int _Status;
+        partial void OnStatusChanging(int value);
         partial void OnStatusChanged();
     }
 }

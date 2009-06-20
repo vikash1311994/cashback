@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+    <Schema Namespace="Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Brands" EntityType="Models.Store.Brands" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Categories" EntityType="Models.Store.Categories" store:Type="Tables" Schema="dbo" />
@@ -59,7 +59,7 @@
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'C:\PROJECTS\CASHBACK\CASHBACK.WEB\APP_DATA\CASHBACKDB.MDF.dbo.CategoryMappings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'G:\PROJECTS\CASHBACK\CASHBACK.WEB\APP_DATA\CASHBACKDB.MDF.dbo.CategoryMappings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="CategoryMappings">
           <Key>
@@ -72,7 +72,7 @@
           <Property Name="Program" Type="nvarchar" Nullable="false" MaxLength="128" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'C:\PROJECTS\CASHBACK\CASHBACK.WEB\APP_DATA\CASHBACKDB.MDF.dbo.ProductCategories' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'G:\PROJECTS\CASHBACK\CASHBACK.WEB\APP_DATA\CASHBACKDB.MDF.dbo.ProductCategories' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="ProductCategories">
           <Key>
@@ -114,7 +114,10 @@
           <Property Name="ShippingInformation" Type="nvarchar" MaxLength="256" />
           <Property Name="ShippingAvailability" Type="nvarchar" MaxLength="64" />
           <Property Name="Currency" Type="nvarchar" MaxLength="3" />
-          <Property Name="Status" Type="int" />
+          <Property Name="Program" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Stores">
           <Key>
@@ -164,8 +167,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Models" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
@@ -265,9 +267,11 @@
           <Property Name="ShippingInformation" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
           <Property Name="ShippingAvailability" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
           <Property Name="Currency" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
-          <Property Name="Status" Type="Int32" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ProductCategories" Relationship="Models.FK_ProductCategories_Products" FromRole="Products" ToRole="ProductCategories" />
-        </EntityType>
+          <Property Name="Program" Type="String" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" /></EntityType>
         <EntityType Name="Store">
           <Key>
             <PropertyRef Name="ID" />
@@ -366,6 +370,9 @@
           <EntitySetMapping Name="ProductSet">
             <EntityTypeMapping TypeName="IsTypeOf(Models.Product)">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -457,7 +464,7 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="CashBack" ZoomLevel="43">
+      <Diagram Name="CashBack" ZoomLevel="99">
         <EntityTypeShape EntityType="Models.Brand" Width="1.5" PointX="5.75" PointY="2.125" Height="2.3648893229166665" IsExpanded="true" />
         <EntityTypeShape EntityType="Models.Category" Width="1.5" PointX="0.75" PointY="3.625" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="Models.CategoryMapping" Width="1.5" PointX="3" PointY="3.875" Height="1.7879850260416674" IsExpanded="true" />

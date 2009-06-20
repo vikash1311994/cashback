@@ -37,6 +37,9 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.Entity">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Abstractions" />
@@ -44,6 +47,7 @@
     <Reference Include="System.Web.Routing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\CatalogRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\AccountControllerTest.cs" />
@@ -53,10 +57,29 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CashBack.Crawler\CashBack.Crawler.csproj">
+      <Project>{0B856AAD-0A54-4844-9D8D-2441E99F0C84}</Project>
+      <Name>CashBack.Crawler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CashBack.Data\CashBack.Data.csproj">
+      <Project>{1CD1204B-75D1-45BF-8391-F955EF91757C}</Project>
+      <Name>CashBack.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CashBack.Indexer\CashBack.Indexer.csproj">
+      <Project>{1A6CEFE4-B42B-4B7F-8F99-A233C25E7393}</Project>
+      <Name>CashBack.Indexer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CashBack.Services\CashBack.Services.csproj">
+      <Project>{1E4F2834-C8B0-4C7E-8FC5-E84D90AD0EF2}</Project>
+      <Name>CashBack.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CashBack.Web\CashBack.Web.csproj">
       <Project>{988A66BE-6031-41E2-94A4-6DD9C9EBD711}</Project>
       <Name>CashBack.Web</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,5 +7,6 @@ namespace CashBack.Data
 {
     public interface ICatalogRepository
     {
+        IEnumerable<Category> GetAllCategories();
     }
 }

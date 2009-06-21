@@ -9,12 +9,14 @@
 //------------------------------------------------------------------------------
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Models", "FK_Products_Advertisers", "Advertisers", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CashBack.Data.Advertiser), "Products", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CashBack.Data.Product))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Models", "FK_Products_Brands", "Brands", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(CashBack.Data.Brand), "Products", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CashBack.Data.Product))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Models", "FK_CategoryMappings_Categories", "Categories", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CashBack.Data.Category), "CategoryMappings", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CashBack.Data.CategoryMapping))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Models", "FK_ProductCategories_Categories", "Categories", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CashBack.Data.Category), "ProductCategories", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CashBack.Data.ProductCategory))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Models", "FK_ProductCategories_Products", "Products", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(CashBack.Data.Product), "ProductCategories", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(CashBack.Data.ProductCategory))]
 
 // Original file name:
-// Generation date: 6/19/2009 11:55:45 PM
+// Generation date: 6/21/2009 3:56:43 AM
 namespace CashBack.Data
 {
     
@@ -48,6 +50,21 @@ namespace CashBack.Data
             this.OnContextCreated();
         }
         partial void OnContextCreated();
+        /// <summary>
+        /// There are no comments for AdvertiserSet in the schema.
+        /// </summary>
+        public global::System.Data.Objects.ObjectQuery<Advertiser> AdvertiserSet
+        {
+            get
+            {
+                if ((this._AdvertiserSet == null))
+                {
+                    this._AdvertiserSet = base.CreateQuery<Advertiser>("[AdvertiserSet]");
+                }
+                return this._AdvertiserSet;
+            }
+        }
+        private global::System.Data.Objects.ObjectQuery<Advertiser> _AdvertiserSet;
         /// <summary>
         /// There are no comments for BrandSet in the schema.
         /// </summary>
@@ -124,20 +141,27 @@ namespace CashBack.Data
         }
         private global::System.Data.Objects.ObjectQuery<Product> _ProductSet;
         /// <summary>
-        /// There are no comments for StoreSet in the schema.
+        /// There are no comments for ProviderSet in the schema.
         /// </summary>
-        public global::System.Data.Objects.ObjectQuery<Store> StoreSet
+        public global::System.Data.Objects.ObjectQuery<Provider> ProviderSet
         {
             get
             {
-                if ((this._StoreSet == null))
+                if ((this._ProviderSet == null))
                 {
-                    this._StoreSet = base.CreateQuery<Store>("[StoreSet]");
+                    this._ProviderSet = base.CreateQuery<Provider>("[ProviderSet]");
                 }
-                return this._StoreSet;
+                return this._ProviderSet;
             }
         }
-        private global::System.Data.Objects.ObjectQuery<Store> _StoreSet;
+        private global::System.Data.Objects.ObjectQuery<Provider> _ProviderSet;
+        /// <summary>
+        /// There are no comments for AdvertiserSet in the schema.
+        /// </summary>
+        public void AddToAdvertiserSet(Advertiser advertiser)
+        {
+            base.AddObject("AdvertiserSet", advertiser);
+        }
         /// <summary>
         /// There are no comments for BrandSet in the schema.
         /// </summary>
@@ -174,11 +198,223 @@ namespace CashBack.Data
             base.AddObject("ProductSet", product);
         }
         /// <summary>
-        /// There are no comments for StoreSet in the schema.
+        /// There are no comments for ProviderSet in the schema.
         /// </summary>
-        public void AddToStoreSet(Store store)
+        public void AddToProviderSet(Provider provider)
         {
-            base.AddObject("StoreSet", store);
+            base.AddObject("ProviderSet", provider);
+        }
+    }
+    /// <summary>
+    /// There are no comments for Models.Advertiser in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="Models", Name="Advertiser")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class Advertiser : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Create a new Advertiser object.
+        /// </summary>
+        /// <param name="id">Initial value of ID.</param>
+        /// <param name="advertiserID">Initial value of AdvertiserID.</param>
+        /// <param name="advertiserName">Initial value of AdvertiserName.</param>
+        /// <param name="program">Initial value of Program.</param>
+        /// <param name="status">Initial value of Status.</param>
+        public static Advertiser CreateAdvertiser(int id, string advertiserID, string advertiserName, string program, int status)
+        {
+            Advertiser advertiser = new Advertiser();
+            advertiser.ID = id;
+            advertiser.AdvertiserID = advertiserID;
+            advertiser.AdvertiserName = advertiserName;
+            advertiser.Program = program;
+            advertiser.Status = status;
+            return advertiser;
+        }
+        /// <summary>
+        /// There are no comments for Property ID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.OnIDChanging(value);
+                this.ReportPropertyChanging("ID");
+                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID");
+                this.OnIDChanged();
+            }
+        }
+        private int _ID;
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+        /// <summary>
+        /// There are no comments for Property AdvertiserID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string AdvertiserID
+        {
+            get
+            {
+                return this._AdvertiserID;
+            }
+            set
+            {
+                this.OnAdvertiserIDChanging(value);
+                this.ReportPropertyChanging("AdvertiserID");
+                this._AdvertiserID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("AdvertiserID");
+                this.OnAdvertiserIDChanged();
+            }
+        }
+        private string _AdvertiserID;
+        partial void OnAdvertiserIDChanging(string value);
+        partial void OnAdvertiserIDChanged();
+        /// <summary>
+        /// There are no comments for Property AdvertiserName in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string AdvertiserName
+        {
+            get
+            {
+                return this._AdvertiserName;
+            }
+            set
+            {
+                this.OnAdvertiserNameChanging(value);
+                this.ReportPropertyChanging("AdvertiserName");
+                this._AdvertiserName = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("AdvertiserName");
+                this.OnAdvertiserNameChanged();
+            }
+        }
+        private string _AdvertiserName;
+        partial void OnAdvertiserNameChanging(string value);
+        partial void OnAdvertiserNameChanged();
+        /// <summary>
+        /// There are no comments for Property AdvertiserURL in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string AdvertiserURL
+        {
+            get
+            {
+                return this._AdvertiserURL;
+            }
+            set
+            {
+                this.OnAdvertiserURLChanging(value);
+                this.ReportPropertyChanging("AdvertiserURL");
+                this._AdvertiserURL = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("AdvertiserURL");
+                this.OnAdvertiserURLChanged();
+            }
+        }
+        private string _AdvertiserURL;
+        partial void OnAdvertiserURLChanging(string value);
+        partial void OnAdvertiserURLChanged();
+        /// <summary>
+        /// There are no comments for Property ImageURL in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string ImageURL
+        {
+            get
+            {
+                return this._ImageURL;
+            }
+            set
+            {
+                this.OnImageURLChanging(value);
+                this.ReportPropertyChanging("ImageURL");
+                this._ImageURL = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("ImageURL");
+                this.OnImageURLChanged();
+            }
+        }
+        private string _ImageURL;
+        partial void OnImageURLChanging(string value);
+        partial void OnImageURLChanged();
+        /// <summary>
+        /// There are no comments for Property Program in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string Program
+        {
+            get
+            {
+                return this._Program;
+            }
+            set
+            {
+                this.OnProgramChanging(value);
+                this.ReportPropertyChanging("Program");
+                this._Program = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("Program");
+                this.OnProgramChanged();
+            }
+        }
+        private string _Program;
+        partial void OnProgramChanging(string value);
+        partial void OnProgramChanged();
+        /// <summary>
+        /// There are no comments for Property Status in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int Status
+        {
+            get
+            {
+                return this._Status;
+            }
+            set
+            {
+                this.OnStatusChanging(value);
+                this.ReportPropertyChanging("Status");
+                this._Status = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("Status");
+                this.OnStatusChanged();
+            }
+        }
+        private int _Status;
+        partial void OnStatusChanging(int value);
+        partial void OnStatusChanged();
+        /// <summary>
+        /// There are no comments for Products in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("Models", "FK_Products_Advertisers", "Products")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<Product> Products
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Product>("Models.FK_Products_Advertisers", "Products");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Product>("Models.FK_Products_Advertisers", "Products", value);
+                }
+            }
         }
     }
     /// <summary>
@@ -371,6 +607,27 @@ namespace CashBack.Data
         private int _Status;
         partial void OnStatusChanging(int value);
         partial void OnStatusChanged();
+        /// <summary>
+        /// There are no comments for Products in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("Models", "FK_Products_Brands", "Products")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<Product> Products
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Product>("Models.FK_Products_Brands", "Products");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Product>("Models.FK_Products_Brands", "Products", value);
+                }
+            }
+        }
     }
     /// <summary>
     /// There are no comments for Models.Category in the schema.
@@ -854,20 +1111,20 @@ namespace CashBack.Data
         /// <param name="id">Initial value of ID.</param>
         /// <param name="productID">Initial value of ProductID.</param>
         /// <param name="productName">Initial value of ProductName.</param>
-        /// <param name="status">Initial value of Status.</param>
         /// <param name="program">Initial value of Program.</param>
         /// <param name="createdDate">Initial value of CreatedDate.</param>
         /// <param name="modifiedDate">Initial value of ModifiedDate.</param>
-        public static Product CreateProduct(int id, string productID, string productName, int status, string program, global::System.DateTime createdDate, global::System.DateTime modifiedDate)
+        /// <param name="status">Initial value of Status.</param>
+        public static Product CreateProduct(int id, string productID, string productName, string program, global::System.DateTime createdDate, global::System.DateTime modifiedDate, int status)
         {
             Product product = new Product();
             product.ID = id;
             product.ProductID = productID;
             product.ProductName = productName;
-            product.Status = status;
             product.Program = program;
             product.CreatedDate = createdDate;
             product.ModifiedDate = modifiedDate;
+            product.Status = status;
             return product;
         }
         /// <summary>
@@ -1078,29 +1335,6 @@ namespace CashBack.Data
         partial void OnLongDescriptionChanging(string value);
         partial void OnLongDescriptionChanged();
         /// <summary>
-        /// There are no comments for Property Brand in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public string Brand
-        {
-            get
-            {
-                return this._Brand;
-            }
-            set
-            {
-                this.OnBrandChanging(value);
-                this.ReportPropertyChanging("Brand");
-                this._Brand = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
-                this.ReportPropertyChanged("Brand");
-                this.OnBrandChanged();
-            }
-        }
-        private string _Brand;
-        partial void OnBrandChanging(string value);
-        partial void OnBrandChanged();
-        /// <summary>
         /// There are no comments for Property Keywords in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
@@ -1146,29 +1380,6 @@ namespace CashBack.Data
         private string _PartNumber;
         partial void OnPartNumberChanging(string value);
         partial void OnPartNumberChanged();
-        /// <summary>
-        /// There are no comments for Property ManufacturerName in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public string ManufacturerName
-        {
-            get
-            {
-                return this._ManufacturerName;
-            }
-            set
-            {
-                this.OnManufacturerNameChanging(value);
-                this.ReportPropertyChanging("ManufacturerName");
-                this._ManufacturerName = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
-                this.ReportPropertyChanged("ManufacturerName");
-                this.OnManufacturerNameChanged();
-            }
-        }
-        private string _ManufacturerName;
-        partial void OnManufacturerNameChanging(string value);
-        partial void OnManufacturerNameChanged();
         /// <summary>
         /// There are no comments for Property UPC in the schema.
         /// </summary>
@@ -1469,29 +1680,6 @@ namespace CashBack.Data
         partial void OnCurrencyChanging(string value);
         partial void OnCurrencyChanged();
         /// <summary>
-        /// There are no comments for Property Status in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public int Status
-        {
-            get
-            {
-                return this._Status;
-            }
-            set
-            {
-                this.OnStatusChanging(value);
-                this.ReportPropertyChanging("Status");
-                this._Status = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Status");
-                this.OnStatusChanged();
-            }
-        }
-        private int _Status;
-        partial void OnStatusChanging(int value);
-        partial void OnStatusChanged();
-        /// <summary>
         /// There are no comments for Property Program in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
@@ -1561,195 +1749,6 @@ namespace CashBack.Data
         partial void OnModifiedDateChanging(global::System.DateTime value);
         partial void OnModifiedDateChanged();
         /// <summary>
-        /// There are no comments for ProductCategories in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("Models", "FK_ProductCategories_Products", "ProductCategories")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<ProductCategory> ProductCategories
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<ProductCategory>("Models.FK_ProductCategories_Products", "ProductCategories");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<ProductCategory>("Models.FK_ProductCategories_Products", "ProductCategories", value);
-                }
-            }
-        }
-    }
-    /// <summary>
-    /// There are no comments for Models.Store in the schema.
-    /// </summary>
-    /// <KeyProperties>
-    /// ID
-    /// </KeyProperties>
-    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="Models", Name="Store")]
-    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
-    [global::System.Serializable()]
-    public partial class Store : global::System.Data.Objects.DataClasses.EntityObject
-    {
-        /// <summary>
-        /// Create a new Store object.
-        /// </summary>
-        /// <param name="id">Initial value of ID.</param>
-        /// <param name="storeName">Initial value of StoreName.</param>
-        /// <param name="storeID">Initial value of StoreID.</param>
-        /// <param name="program">Initial value of Program.</param>
-        /// <param name="status">Initial value of Status.</param>
-        public static Store CreateStore(int id, string storeName, string storeID, string program, int status)
-        {
-            Store store = new Store();
-            store.ID = id;
-            store.StoreName = storeName;
-            store.StoreID = storeID;
-            store.Program = program;
-            store.Status = status;
-            return store;
-        }
-        /// <summary>
-        /// There are no comments for Property ID in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public int ID
-        {
-            get
-            {
-                return this._ID;
-            }
-            set
-            {
-                this.OnIDChanging(value);
-                this.ReportPropertyChanging("ID");
-                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("ID");
-                this.OnIDChanged();
-            }
-        }
-        private int _ID;
-        partial void OnIDChanging(int value);
-        partial void OnIDChanged();
-        /// <summary>
-        /// There are no comments for Property StoreName in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public string StoreName
-        {
-            get
-            {
-                return this._StoreName;
-            }
-            set
-            {
-                this.OnStoreNameChanging(value);
-                this.ReportPropertyChanging("StoreName");
-                this._StoreName = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("StoreName");
-                this.OnStoreNameChanged();
-            }
-        }
-        private string _StoreName;
-        partial void OnStoreNameChanging(string value);
-        partial void OnStoreNameChanged();
-        /// <summary>
-        /// There are no comments for Property StoreID in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public string StoreID
-        {
-            get
-            {
-                return this._StoreID;
-            }
-            set
-            {
-                this.OnStoreIDChanging(value);
-                this.ReportPropertyChanging("StoreID");
-                this._StoreID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("StoreID");
-                this.OnStoreIDChanged();
-            }
-        }
-        private string _StoreID;
-        partial void OnStoreIDChanging(string value);
-        partial void OnStoreIDChanged();
-        /// <summary>
-        /// There are no comments for Property StoreURL in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public string StoreURL
-        {
-            get
-            {
-                return this._StoreURL;
-            }
-            set
-            {
-                this.OnStoreURLChanging(value);
-                this.ReportPropertyChanging("StoreURL");
-                this._StoreURL = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
-                this.ReportPropertyChanged("StoreURL");
-                this.OnStoreURLChanged();
-            }
-        }
-        private string _StoreURL;
-        partial void OnStoreURLChanging(string value);
-        partial void OnStoreURLChanged();
-        /// <summary>
-        /// There are no comments for Property ImageURL in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public string ImageURL
-        {
-            get
-            {
-                return this._ImageURL;
-            }
-            set
-            {
-                this.OnImageURLChanging(value);
-                this.ReportPropertyChanging("ImageURL");
-                this._ImageURL = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
-                this.ReportPropertyChanged("ImageURL");
-                this.OnImageURLChanged();
-            }
-        }
-        private string _ImageURL;
-        partial void OnImageURLChanging(string value);
-        partial void OnImageURLChanged();
-        /// <summary>
-        /// There are no comments for Property Program in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public string Program
-        {
-            get
-            {
-                return this._Program;
-            }
-            set
-            {
-                this.OnProgramChanging(value);
-                this.ReportPropertyChanging("Program");
-                this._Program = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("Program");
-                this.OnProgramChanged();
-            }
-        }
-        private string _Program;
-        partial void OnProgramChanging(string value);
-        partial void OnProgramChanged();
-        /// <summary>
         /// There are no comments for Property Status in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
@@ -1772,5 +1771,243 @@ namespace CashBack.Data
         private int _Status;
         partial void OnStatusChanging(int value);
         partial void OnStatusChanged();
+        /// <summary>
+        /// There are no comments for Advertisers in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("Models", "FK_Products_Advertisers", "Advertisers")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public Advertiser Advertisers
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Advertiser>("Models.FK_Products_Advertisers", "Advertisers").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Advertiser>("Models.FK_Products_Advertisers", "Advertisers").Value = value;
+            }
+        }
+        /// <summary>
+        /// There are no comments for Advertisers in the schema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<Advertiser> AdvertisersReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Advertiser>("Models.FK_Products_Advertisers", "Advertisers");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Advertiser>("Models.FK_Products_Advertisers", "Advertisers", value);
+                }
+            }
+        }
+        /// <summary>
+        /// There are no comments for Brands in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("Models", "FK_Products_Brands", "Brands")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public Brand Brands
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Brand>("Models.FK_Products_Brands", "Brands").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Brand>("Models.FK_Products_Brands", "Brands").Value = value;
+            }
+        }
+        /// <summary>
+        /// There are no comments for Brands in the schema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<Brand> BrandsReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Brand>("Models.FK_Products_Brands", "Brands");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Brand>("Models.FK_Products_Brands", "Brands", value);
+                }
+            }
+        }
+        /// <summary>
+        /// There are no comments for ProductCategories in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("Models", "FK_ProductCategories_Products", "ProductCategories")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<ProductCategory> ProductCategories
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<ProductCategory>("Models.FK_ProductCategories_Products", "ProductCategories");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<ProductCategory>("Models.FK_ProductCategories_Products", "ProductCategories", value);
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// There are no comments for Models.Provider in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ProviderID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="Models", Name="Provider")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class Provider : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Create a new Provider object.
+        /// </summary>
+        /// <param name="providerID">Initial value of ProviderID.</param>
+        /// <param name="providerName">Initial value of ProviderName.</param>
+        /// <param name="runInterval">Initial value of RunInterval.</param>
+        /// <param name="isActive">Initial value of IsActive.</param>
+        public static Provider CreateProvider(int providerID, string providerName, int runInterval, bool isActive)
+        {
+            Provider provider = new Provider();
+            provider.ProviderID = providerID;
+            provider.ProviderName = providerName;
+            provider.RunInterval = runInterval;
+            provider.IsActive = isActive;
+            return provider;
+        }
+        /// <summary>
+        /// There are no comments for Property ProviderID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int ProviderID
+        {
+            get
+            {
+                return this._ProviderID;
+            }
+            set
+            {
+                this.OnProviderIDChanging(value);
+                this.ReportPropertyChanging("ProviderID");
+                this._ProviderID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ProviderID");
+                this.OnProviderIDChanged();
+            }
+        }
+        private int _ProviderID;
+        partial void OnProviderIDChanging(int value);
+        partial void OnProviderIDChanged();
+        /// <summary>
+        /// There are no comments for Property ProviderName in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string ProviderName
+        {
+            get
+            {
+                return this._ProviderName;
+            }
+            set
+            {
+                this.OnProviderNameChanging(value);
+                this.ReportPropertyChanging("ProviderName");
+                this._ProviderName = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("ProviderName");
+                this.OnProviderNameChanged();
+            }
+        }
+        private string _ProviderName;
+        partial void OnProviderNameChanging(string value);
+        partial void OnProviderNameChanged();
+        /// <summary>
+        /// There are no comments for Property LastRun in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Nullable<global::System.DateTime> LastRun
+        {
+            get
+            {
+                return this._LastRun;
+            }
+            set
+            {
+                this.OnLastRunChanging(value);
+                this.ReportPropertyChanging("LastRun");
+                this._LastRun = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("LastRun");
+                this.OnLastRunChanged();
+            }
+        }
+        private global::System.Nullable<global::System.DateTime> _LastRun;
+        partial void OnLastRunChanging(global::System.Nullable<global::System.DateTime> value);
+        partial void OnLastRunChanged();
+        /// <summary>
+        /// There are no comments for Property RunInterval in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int RunInterval
+        {
+            get
+            {
+                return this._RunInterval;
+            }
+            set
+            {
+                this.OnRunIntervalChanging(value);
+                this.ReportPropertyChanging("RunInterval");
+                this._RunInterval = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("RunInterval");
+                this.OnRunIntervalChanged();
+            }
+        }
+        private int _RunInterval;
+        partial void OnRunIntervalChanging(int value);
+        partial void OnRunIntervalChanged();
+        /// <summary>
+        /// There are no comments for Property IsActive in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsActive
+        {
+            get
+            {
+                return this._IsActive;
+            }
+            set
+            {
+                this.OnIsActiveChanging(value);
+                this.ReportPropertyChanging("IsActive");
+                this._IsActive = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("IsActive");
+                this.OnIsActiveChanged();
+            }
+        }
+        private bool _IsActive;
+        partial void OnIsActiveChanging(bool value);
+        partial void OnIsActiveChanged();
     }
 }

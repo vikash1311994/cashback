@@ -6,6 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
         <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="Advertisers" EntityType="Models.Store.Advertisers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Brands" EntityType="Models.Store.Brands" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Categories" EntityType="Models.Store.Categories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CategoryMappings" EntityType="Models.Store.CategoryMappings" store:Type="Tables" store:Schema="dbo" store:Name="CategoryMappings">
@@ -23,7 +24,7 @@
       FROM [dbo].[ProductCategories] AS [ProductCategories]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Products" EntityType="Models.Store.Products" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Stores" EntityType="Models.Store.Stores" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Providers" EntityType="Models.Store.Providers" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_CategoryMappings_Categories" Association="Models.Store.FK_CategoryMappings_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="CategoryMappings" EntitySet="CategoryMappings" />
@@ -36,7 +37,27 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductCategories" EntitySet="ProductCategories" />
           </AssociationSet>
+          <AssociationSet Name="FK_Products_Advertisers" Association="Models.Store.FK_Products_Advertisers">
+            <End Role="Advertisers" EntitySet="Advertisers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Brands" Association="Models.Store.FK_Products_Brands">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Advertisers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AdvertiserID" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="AdvertiserName" Type="nvarchar" Nullable="false" MaxLength="512" />
+          <Property Name="AdvertiserURL" Type="nvarchar" MaxLength="2048" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="2048" />
+          <Property Name="Program" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Brands">
           <Key>
             <PropertyRef Name="ID" />
@@ -97,10 +118,8 @@
           <Property Name="BuyURL" Type="nvarchar" MaxLength="2048" />
           <Property Name="ShortDescription" Type="nvarchar" MaxLength="512" />
           <Property Name="LongDescription" Type="nvarchar" MaxLength="2048" />
-          <Property Name="Brand" Type="nvarchar" MaxLength="256" />
           <Property Name="Keywords" Type="nvarchar" MaxLength="512" />
           <Property Name="PartNumber" Type="nvarchar" MaxLength="64" />
-          <Property Name="ManufacturerName" Type="nvarchar" MaxLength="512" />
           <Property Name="UPC" Type="nvarchar" MaxLength="32" />
           <Property Name="Classification" Type="int" />
           <Property Name="Attributes" Type="nvarchar" MaxLength="2000" />
@@ -117,19 +136,19 @@
           <Property Name="Program" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="BrandID" Type="int" />
+          <Property Name="AdvertiserID" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Stores">
+        <EntityType Name="Providers">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ProviderID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="StoreName" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="StoreID" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="StoreURL" Type="nvarchar" MaxLength="2000" />
-          <Property Name="ImageURL" Type="nvarchar" MaxLength="2000" />
-          <Property Name="Program" Type="nvarchar" Nullable="false" MaxLength="128" />
-          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="ProviderID" Type="int" Nullable="false" />
+          <Property Name="ProviderName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="LastRun" Type="datetime" />
+          <Property Name="RunInterval" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_CategoryMappings_Categories">
           <End Role="Categories" Type="Models.Store.Categories" Multiplicity="1" />
@@ -167,17 +186,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Products_Advertisers">
+          <End Role="Advertisers" Type="Models.Store.Advertisers" Multiplicity="1" />
+          <End Role="Products" Type="Models.Store.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Advertisers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="AdvertiserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Brands">
+          <End Role="Brands" Type="Models.Store.Brands" Multiplicity="0..1" />
+          <End Role="Products" Type="Models.Store.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Models" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
         <EntityContainer Name="CashBackDBEntities">
+          <EntitySet Name="AdvertiserSet" EntityType="Models.Advertiser" />
           <EntitySet Name="BrandSet" EntityType="Models.Brand" />
           <EntitySet Name="CategorySet" EntityType="Models.Category" />
           <EntitySet Name="CategoryMappingSet" EntityType="Models.CategoryMapping" />
           <EntitySet Name="ProductCategorySet" EntityType="Models.ProductCategory" />
           <EntitySet Name="ProductSet" EntityType="Models.Product" />
-          <EntitySet Name="StoreSet" EntityType="Models.Store" />
+          <AssociationSet Name="FK_Products_Advertisers" Association="Models.FK_Products_Advertisers">
+            <End Role="Advertisers" EntitySet="AdvertiserSet" />
+            <End Role="Products" EntitySet="ProductSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Brands" Association="Models.FK_Products_Brands">
+            <End Role="Brands" EntitySet="BrandSet" />
+            <End Role="Products" EntitySet="ProductSet" />
+          </AssociationSet>
           <AssociationSet Name="FK_CategoryMappings_Categories" Association="Models.FK_CategoryMappings_Categories">
             <End Role="Categories" EntitySet="CategorySet" />
             <End Role="CategoryMappings" EntitySet="CategoryMappingSet" />
@@ -190,7 +241,20 @@
             <End Role="Products" EntitySet="ProductSet" />
             <End Role="ProductCategories" EntitySet="ProductCategorySet" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="ProviderSet" EntityType="Models.Provider" /></EntityContainer>
+        <EntityType Name="Advertiser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="AdvertiserID" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AdvertiserName" Type="String" Nullable="false" MaxLength="512" Unicode="true" FixedLength="false" />
+          <Property Name="AdvertiserURL" Type="String" MaxLength="2048" Unicode="true" FixedLength="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="2048" Unicode="true" FixedLength="false" />
+          <Property Name="Program" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Models.FK_Products_Advertisers" FromRole="Advertisers" ToRole="Products" />
+        </EntityType>
         <EntityType Name="Brand">
           <Key>
             <PropertyRef Name="ID" />
@@ -202,6 +266,7 @@
           <Property Name="ImageURL" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
           <Property Name="Program" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Models.FK_Products_Brands" FromRole="Brands" ToRole="Products" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -250,10 +315,8 @@
           <Property Name="BuyURL" Type="String" MaxLength="2048" Unicode="true" FixedLength="false" />
           <Property Name="ShortDescription" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
           <Property Name="LongDescription" Type="String" MaxLength="2048" Unicode="true" FixedLength="false" />
-          <Property Name="Brand" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
           <Property Name="Keywords" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
           <Property Name="PartNumber" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
-          <Property Name="ManufacturerName" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
           <Property Name="UPC" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
           <Property Name="Classification" Type="Int32" />
           <Property Name="Attributes" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
@@ -267,23 +330,22 @@
           <Property Name="ShippingInformation" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
           <Property Name="ShippingAvailability" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
           <Property Name="Currency" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ProductCategories" Relationship="Models.FK_ProductCategories_Products" FromRole="Products" ToRole="ProductCategories" />
-          <Property Name="Program" Type="String" Nullable="false" />
+          <Property Name="Program" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" /></EntityType>
-        <EntityType Name="Store">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="StoreName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
-          <Property Name="StoreID" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="StoreURL" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
-          <Property Name="ImageURL" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
-          <Property Name="Program" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Advertisers" Relationship="Models.FK_Products_Advertisers" FromRole="Products" ToRole="Advertisers" />
+          <NavigationProperty Name="Brands" Relationship="Models.FK_Products_Brands" FromRole="Products" ToRole="Brands" />
+          <NavigationProperty Name="ProductCategories" Relationship="Models.FK_ProductCategories_Products" FromRole="Products" ToRole="ProductCategories" />
         </EntityType>
+        <Association Name="FK_Products_Advertisers">
+          <End Role="Advertisers" Type="Models.Advertiser" Multiplicity="1" />
+          <End Role="Products" Type="Models.Product" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Products_Brands">
+          <End Role="Brands" Type="Models.Brand" Multiplicity="0..1" />
+          <End Role="Products" Type="Models.Product" Multiplicity="*" />
+        </Association>
         <Association Name="FK_CategoryMappings_Categories">
           <End Role="Categories" Type="Models.Category" Multiplicity="1" />
           <End Role="CategoryMappings" Type="Models.CategoryMapping" Multiplicity="*" />
@@ -320,12 +382,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ProviderID" /></Key>
+          <Property Name="ProviderID" Type="Int32" Nullable="false" />
+          <Property Name="ProviderName" Type="String" Nullable="false" />
+          <Property Name="LastRun" Type="DateTime" Nullable="true" />
+          <Property Name="RunInterval" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" /></EntityType></Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
         <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="CashBackDBEntities">
+          <EntitySetMapping Name="AdvertiserSet">
+            <EntityTypeMapping TypeName="IsTypeOf(Models.Advertiser)">
+              <MappingFragment StoreEntitySet="Advertisers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AdvertiserID" ColumnName="AdvertiserID" />
+                <ScalarProperty Name="AdvertiserName" ColumnName="AdvertiserName" />
+                <ScalarProperty Name="AdvertiserURL" ColumnName="AdvertiserURL" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BrandSet">
             <EntityTypeMapping TypeName="IsTypeOf(Models.Brand)">
               <MappingFragment StoreEntitySet="Brands">
@@ -370,9 +452,6 @@
           <EntitySetMapping Name="ProductSet">
             <EntityTypeMapping TypeName="IsTypeOf(Models.Product)">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Program" ColumnName="Program" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -382,10 +461,8 @@
                 <ScalarProperty Name="BuyURL" ColumnName="BuyURL" />
                 <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
                 <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
-                <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="Keywords" ColumnName="Keywords" />
                 <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
-                <ScalarProperty Name="ManufacturerName" ColumnName="ManufacturerName" />
                 <ScalarProperty Name="UPC" ColumnName="UPC" />
                 <ScalarProperty Name="Classification" ColumnName="Classification" />
                 <ScalarProperty Name="Attributes" ColumnName="Attributes" />
@@ -399,23 +476,30 @@
                 <ScalarProperty Name="ShippingInformation" ColumnName="ShippingInformation" />
                 <ScalarProperty Name="ShippingAvailability" ColumnName="ShippingAvailability" />
                 <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StoreSet">
-            <EntityTypeMapping TypeName="IsTypeOf(Models.Store)">
-              <MappingFragment StoreEntitySet="Stores">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
-                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
-                <ScalarProperty Name="StoreURL" ColumnName="StoreURL" />
-                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
                 <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="FK_Products_Advertisers" TypeName="Models.FK_Products_Advertisers" StoreEntitySet="Products">
+            <EndProperty Name="Advertisers">
+              <ScalarProperty Name="ID" ColumnName="AdvertiserID" />
+            </EndProperty>
+            <EndProperty Name="Products">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Products_Brands" TypeName="Models.FK_Products_Brands" StoreEntitySet="Products">
+            <EndProperty Name="Brands">
+              <ScalarProperty Name="ID" ColumnName="BrandID" />
+            </EndProperty>
+            <EndProperty Name="Products">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <Condition ColumnName="BrandID" IsNull="false" />
+          </AssociationSetMapping>
           <AssociationSetMapping Name="FK_CategoryMappings_Categories" TypeName="Models.FK_CategoryMappings_Categories" StoreEntitySet="CategoryMappings">
             <EndProperty Name="Categories">
               <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -446,7 +530,14 @@
               <ScalarProperty Name="Type" ColumnName="Type" />
             </EndProperty>
           </AssociationSetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="ProviderSet">
+            <EntityTypeMapping TypeName="IsTypeOf(Models.Provider)">
+              <MappingFragment StoreEntitySet="Providers">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="RunInterval" ColumnName="RunInterval" />
+                <ScalarProperty Name="LastRun" ColumnName="LastRun" />
+                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" /></MappingFragment></EntityTypeMapping></EntitySetMapping></EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -464,27 +555,31 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="CashBack" ZoomLevel="99">
-        <EntityTypeShape EntityType="Models.Brand" Width="1.5" PointX="5.75" PointY="2.125" Height="2.3648893229166665" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Category" Width="1.5" PointX="0.75" PointY="3.625" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.CategoryMapping" Width="1.5" PointX="3" PointY="3.875" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.ProductCategory" Width="1.5" PointX="3" PointY="0.75" Height="1.9802864583333335" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Product" Width="1.5" PointX="0.75" PointY="8.875" Height="6.4032194010416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Store" Width="1.5" PointX="2.75" PointY="7.125" Height="2.3648893229166674" IsExpanded="true" />
+      <Diagram Name="CashBack">
+        <EntityTypeShape EntityType="Models.Advertiser" Width="1.5" PointX="0.75" PointY="4.75" Height="2.5571907552083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Brand" Width="1.5" PointX="0.75" PointY="0.75" Height="2.5571907552083331" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Category" Width="1.5" PointX="3" PointY="11" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.CategoryMapping" Width="1.5" PointX="5.25" PointY="11.125" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.ProductCategory" Width="2.625" PointX="6.25" PointY="3.875" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Product" Width="1.5" PointX="3" PointY="2.5" Height="6.9801236979166656" IsExpanded="true" />
+        <AssociationConnector Association="Models.FK_Products_Advertisers" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="6.0285953776041667" />
+          <ConnectorPoint PointX="3" PointY="6.0285953776041667" /></AssociationConnector>
+        <AssociationConnector Association="Models.FK_Products_Brands" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.9035953776041667" />
+          <ConnectorPoint PointX="3" PointY="2.9035953776041667" /></AssociationConnector>
         <AssociationConnector Association="Models.FK_CategoryMappings_Categories" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="4.7689925130208337" />
-          <ConnectorPoint PointX="2.4166666666666665" PointY="4.7689925130208328" />
-          <ConnectorPoint PointX="2.5833333333333335" PointY="4.7689925130208337" />
-          <ConnectorPoint PointX="3" PointY="4.7689925130208337" /></AssociationConnector>
+          <ConnectorPoint PointX="4.5" PointY="12.018992513020834" />
+          <ConnectorPoint PointX="5.25" PointY="12.018992513020834" />
+          </AssociationConnector>
         <AssociationConnector Association="Models.FK_ProductCategories_Categories" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="3.625" />
-          <ConnectorPoint PointX="1.5" PointY="1.7401432291666668" />
-          <ConnectorPoint PointX="3" PointY="1.7401432291666668" /></AssociationConnector>
+          <ConnectorPoint PointX="4.5" PointY="13.074036458333334" />
+          <ConnectorPoint PointX="7.84375" PointY="13.074036458333334" />
+          <ConnectorPoint PointX="7.84375" PointY="5.8552864583333335" />
+          </AssociationConnector>
         <AssociationConnector Association="Models.FK_ProductCategories_Products" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="8.875" />
-          <ConnectorPoint PointX="1.5" PointY="6.047587890625" />
-          <ConnectorPoint PointX="2.5" PointY="6.047587890625" />
-          <ConnectorPoint PointX="2.5" PointY="2.26646684375" />
-          <ConnectorPoint PointX="3" PointY="2.26646684375" /></AssociationConnector></Diagram></edmx:Diagrams>
+          <ConnectorPoint PointX="4.5" PointY="4.8651432291666667" />
+          <ConnectorPoint PointX="6.25" PointY="4.8651432291666667" /></AssociationConnector>
+        <EntityTypeShape EntityType="Models.Provider" Width="1.5" PointX="5.375" PointY="0.75" Height="1.9802864583333333" /></Diagram></edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

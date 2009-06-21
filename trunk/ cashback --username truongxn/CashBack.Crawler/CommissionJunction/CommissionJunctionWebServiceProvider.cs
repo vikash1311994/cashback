@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 
 using CashBack.Data;
+using CashBack.Services;
 
 namespace CashBack.Crawler
 {
     public class CommissionJunctionWebServiceProvider : Provider
     {
-        public CommissionJunctionWebServiceProvider(ICatalogRepository repository)
-            : base(repository)
+        public CommissionJunctionWebServiceProvider(ICatalogService service)
+            : base(service)
         { }
 
         public CommissionJunctionWebServiceProvider()
-            : base(new CatalogRepository())
+            : base(new CatalogService())
         { }
 
         protected override IList<Product> MakeProducts()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using CashBack.Data;
+using CashBack.Services;
 
 namespace CashBack.Crawler
 {
@@ -14,12 +15,12 @@ namespace CashBack.Crawler
 
     public abstract class Provider : IProvider
     {
-        protected readonly ICatalogRepository Repository;
+        protected readonly ICatalogService Service;
         protected ProgramEnum Program { get; set; }
 
-        public Provider(ICatalogRepository repository)
+        public Provider(ICatalogService service)
         {
-            this.Repository = repository;
+            this.Service = service;
         }
 
         protected abstract IList<Product> MakeProducts();

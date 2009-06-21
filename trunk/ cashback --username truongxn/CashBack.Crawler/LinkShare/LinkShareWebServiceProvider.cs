@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 
 using CashBack.Data;
+using CashBack.Services;
 
 namespace CashBack.Crawler
 {
     public class LinkShareWebServiceProvider : Provider
     {
-        public LinkShareWebServiceProvider(ICatalogRepository repository)
-            : base(repository)
+        public LinkShareWebServiceProvider(ICatalogService service)
+            : base(service)
         { }
 
         public LinkShareWebServiceProvider()
-            : base(new CatalogRepository())
+            : base(new CatalogService())
         { }
 
         protected override IList<Product> MakeProducts()

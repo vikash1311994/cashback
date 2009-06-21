@@ -5,6 +5,7 @@ using System.Text;
 using System.Configuration;
 
 using CashBack.Data;
+using CashBack.Services;
 
 namespace CashBack.Crawler
 {
@@ -14,7 +15,7 @@ namespace CashBack.Crawler
         {
             try
             {
-                ICatalogRepository repository = new CatalogRepository();
+                ICatalogService service = new CatalogService();
                 IProviderManager manager = new ProviderManager();
 
                 if (args.Length > 0)
@@ -22,7 +23,7 @@ namespace CashBack.Crawler
                     int providerID = 0;
                     if (int.TryParse(args[0], out providerID))
                     {
-                        IProvider provider = GetProviderImplementation(providerID, repository);
+                        IProvider provider = GetProviderImplementation(providerID, service);
                         if(provider != null)
                         {
                             manager.Add(provider);
@@ -43,7 +44,7 @@ namespace CashBack.Crawler
                         {
                             if (id > 0)
                             {
-                                IProvider provider = GetProviderImplementation(id, repository);
+                                IProvider provider = GetProviderImplementation(id, service);
                                 if (provider != null)
                                 {
                                     manager.Add(provider);
@@ -60,19 +61,19 @@ namespace CashBack.Crawler
             catch { }
         }
 
-        static IProvider GetProviderImplementation(int providerID, ICatalogRepository repository)
+        static IProvider GetProviderImplementation(int providerID, ICatalogService service)
         {
             IProvider retVal = null;
             switch (providerID)
             {
                 case 1:
-                    retVal = new LinkShareFfpProvider(repository);
+                    retVal = new LinkShareFfpProvider(service);
                     break;
                 case 2:
-                    retVal = new LinkShareWebServiceProvider(repository);
+                    retVal = new LinkShareWebServiceProvider(service);
                     break;
                 case 3:
-                    retVal = new CommissionJunctionWebServiceProvider(repository);
+                    retVal = new CommissionJunctionWebServiceProvider(service);
                     break;
                 default:
                     break;

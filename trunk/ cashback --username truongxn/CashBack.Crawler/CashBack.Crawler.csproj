@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommissionJunction\CommissionJunctionWebServiceProvider.cs" />
+    <Compile Include="LinkShare\LinkShare.cs" />
     <Compile Include="LinkShare\LinkShareFfpProvider.cs" />
     <Compile Include="LinkShare\LinkShareWebServiceProvider.cs" />
     <Compile Include="CommissionJunction\CommissionJunction.cs" />
@@ -69,6 +70,10 @@
     <ProjectReference Include="..\CashBack.Data\CashBack.Data.csproj">
       <Project>{1CD1204B-75D1-45BF-8391-F955EF91757C}</Project>
       <Name>CashBack.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CashBack.Services\CashBack.Services.csproj">
+      <Project>{1E4F2834-C8B0-4C7E-8FC5-E84D90AD0EF2}</Project>
+      <Name>CashBack.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

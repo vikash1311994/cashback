@@ -45,10 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Catalog\CatalogService.cs" />
+    <Compile Include="Catalog\ICatalogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Catalog\" />
     <Folder Include="Coupon\" />
     <Folder Include="Email\" />
     <Folder Include="Logging\" />

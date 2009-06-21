@@ -6,7 +6,7 @@ using System.Text;
 namespace CashBack.Crawler.Model.CJ
 {
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3074")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     [System.Xml.Serialization.XmlRootAttribute("cj-api", Namespace = "", IsNullable = false)]
@@ -29,7 +29,7 @@ namespace CashBack.Crawler.Model.CJ
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3074")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public partial class cjapiProducts
@@ -39,9 +39,9 @@ namespace CashBack.Crawler.Model.CJ
 
         private uint totalmatchedField;
 
-        private byte recordsreturnedField;
+        private ushort recordsreturnedField;
 
-        private byte pagenumberField;
+        private ushort pagenumberField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("product")]
@@ -73,7 +73,7 @@ namespace CashBack.Crawler.Model.CJ
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute("records-returned")]
-        public byte recordsreturned
+        public ushort recordsreturned
         {
             get
             {
@@ -87,7 +87,7 @@ namespace CashBack.Crawler.Model.CJ
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute("page-number")]
-        public byte pagenumber
+        public ushort pagenumber
         {
             get
             {
@@ -100,7 +100,7 @@ namespace CashBack.Crawler.Model.CJ
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3053")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3074")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public partial class cjapiProductsProduct
@@ -128,7 +128,7 @@ namespace CashBack.Crawler.Model.CJ
 
         private string manufacturernameField;
 
-        private object manufacturerskuField;
+        private string manufacturerskuField;
 
         private string nameField;
 
@@ -140,7 +140,7 @@ namespace CashBack.Crawler.Model.CJ
 
         private string skuField;
 
-        private ulong upcField;
+        private string upcField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("ad-id")]
@@ -295,7 +295,7 @@ namespace CashBack.Crawler.Model.CJ
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("manufacturer-sku")]
-        public object manufacturersku
+        public string manufacturersku
         {
             get
             {
@@ -375,7 +375,7 @@ namespace CashBack.Crawler.Model.CJ
         }
 
         /// <remarks/>
-        public ulong upc
+        public string upc
         {
             get
             {

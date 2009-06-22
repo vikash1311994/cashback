@@ -16,24 +16,37 @@ namespace CashBack.Crawler
 {
     public class CommissionJunctionWebServiceProvider : Provider
     {
+        private Data.Provider provider;
         private HttpClient client;
         private const string METHOD = "/v2/product-search?";
         private Model.CJ.cjapi responseContent;
         private HttpRequestMessage request;
+        private ICrawlerService crawlerService;
 
-        public CommissionJunctionWebServiceProvider(ICatalogService service)
+        public CommissionJunctionWebServiceProvider(Data.Provider provider, ICatalogService service, ICrawlerService crawlerService)
             : base(service)
         {
+            this.crawlerService = crawlerService;
+            this.provider = provider;
         }
 
         public CommissionJunctionWebServiceProvider()
-            : base(new CatalogService())
+            : this(new Data.Provider(), new CatalogService(), new CrawlerService())
         { }
+
+        public override void UpdateProvider()
+        {
+            provider.LastRun = DateTime.Now;
+            crawlerService.UpdateLastRun(provider);
+        }        
 
         public override void Execute()
         {
             try
             {
+                //Update last run time
+                UpdateProvider();
+
                 XmlSerializer serializer = new XmlSerializer(typeof(Crawler.Model.CJ.cjapi));
 
                 //Build Client

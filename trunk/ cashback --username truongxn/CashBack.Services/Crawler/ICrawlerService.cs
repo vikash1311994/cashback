@@ -9,6 +9,8 @@ namespace CashBack.Services
 {
     public interface ICrawlerService
     {
-        IList<Provider> GetActiveProviders();
+        IEnumerable<Provider> GetActiveProviders();
+        Provider UpdateLastRun(Provider providerToUpdate);
+        Provider GetProvider(int id);
     }
 }

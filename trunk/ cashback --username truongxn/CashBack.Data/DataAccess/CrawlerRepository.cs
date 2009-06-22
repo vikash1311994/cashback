@@ -16,5 +16,24 @@ namespace CashBack.Data
 
             return providers;
         }
+
+        public Provider GetProvider(int id)
+        {
+            return (from p in db.ProviderSet
+                    where p.ProviderID == id
+                    select p).FirstOrDefault();
+        }
+
+        public Provider UpdateLastRun(Provider providerToUpdate)
+        {
+            //Get original provider
+            var originalProvider = GetProvider(providerToUpdate.ProviderID);
+
+            //Save changes
+            db.ApplyPropertyChanges(originalProvider.EntityKey.EntitySetName, providerToUpdate);
+            db.SaveChanges();
+
+            return providerToUpdate;
+        }
     }
 }

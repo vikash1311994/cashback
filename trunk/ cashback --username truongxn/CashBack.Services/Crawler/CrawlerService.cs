@@ -9,7 +9,7 @@ namespace CashBack.Services
 {
     public class CrawlerService : ICrawlerService
     {
-        private ICrawlerRepository _repository;
+        private ICrawlerRepository repository;
 
         public CrawlerService()
             : this(new CrawlerRepository())
@@ -17,12 +17,22 @@ namespace CashBack.Services
 
         public CrawlerService(ICrawlerRepository repository)
         {
-            _repository = repository;
+            this.repository = repository;
         }
 
-        public IList<Provider> GetActiveProviders()
+        public IEnumerable<Provider> GetActiveProviders()
         {
-            return _repository.GetAllProviders().ToList();
+            return repository.GetAllProviders().Where(p => p.IsActive == true).ToList();
+        }
+
+        public Provider UpdateLastRun(Provider providerToUpdate)
+        {
+            return repository.UpdateLastRun(providerToUpdate);
+        }
+
+        public Provider GetProvider(int id)
+        {
+            return repository.GetProvider(id);
         }
     }
 }

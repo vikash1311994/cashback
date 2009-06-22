@@ -24,27 +24,37 @@ namespace CashBack.Crawler
                     int providerID = 0;
                     if (int.TryParse(args[0], out providerID))
                     {
-                        IProvider provider = GetProviderImplementation(providerID, service);
-                        if(provider != null)
+                        Data.Provider p = crawlerService.GetProvider(providerID);
+                        if (p != null)
                         {
-                            manager.Add(provider);
-                            manager.ExecuteAll();
+                            IProvider provider = GetProviderImplementation(p, service, crawlerService);
+                            if (provider != null)
+                            {
+                                manager.Add(provider);
+                                manager.ExecuteAll();
+                            }
                         }
-
                     }
                 }
                 else
                 {
-                    IList<CashBack.Data.Provider> providers = crawlerService.GetActiveProviders();
+                    IEnumerable<CashBack.Data.Provider> providers = crawlerService.GetActiveProviders();
                     foreach (CashBack.Data.Provider p in providers)
                     {
-                        
-                        IProvider provider = GetProviderImplementation(p.ProviderID, service);
+                        IProvider provider = GetProviderImplementation(p, service, crawlerService);
                         if (provider != null)
                         {
-                            manager.Add(provider);
+                            if (p.LastRun.HasValue)
+                            {
+                                TimeSpan ts = DateTime.Now.Subtract(p.LastRun.Value);
+                                if (ts.Minutes >= p.RunInterval)
+                                    manager.Add(provider);
+                            }
+                            else
+                            {
+                                manager.Add(provider);
+                            }
                         }
-                            
                     }
 
                     //Execute all providers
@@ -55,19 +65,19 @@ namespace CashBack.Crawler
             catch { }
         }
 
-        static IProvider GetProviderImplementation(int providerID, ICatalogService service)
+        static IProvider GetProviderImplementation(Data.Provider provider, ICatalogService service, ICrawlerService crawlerService)
         {
             IProvider retVal = null;
-            switch (providerID)
+            switch (provider.ProviderID)
             {
                 case 1:
-                    retVal = new LinkShareFfpProvider(service);
+                    retVal = new LinkShareFfpProvider();
                     break;
                 case 2:
-                    retVal = new LinkShareWebServiceProvider(service);
+                    retVal = new LinkShareWebServiceProvider();
                     break;
                 case 3:
-                    retVal = new CommissionJunctionWebServiceProvider(service);
+                    retVal = new CommissionJunctionWebServiceProvider(provider, service, crawlerService);
                     break;
                 default:
                     break;

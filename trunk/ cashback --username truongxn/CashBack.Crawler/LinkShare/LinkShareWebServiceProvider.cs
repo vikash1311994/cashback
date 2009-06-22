@@ -18,12 +18,6 @@ namespace CashBack.Crawler
             : base(new CatalogService())
         { }
 
-        protected override IList<Product> MakeProducts()
-        {
-            IList<Product> products = new List<Product>();
-
-            return products;
-        }
         public override void Execute()
         {
         }

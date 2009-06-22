@@ -17,6 +17,7 @@ namespace CashBack.Crawler
             {
                 ICatalogService service = new CatalogService();
                 IProviderManager manager = new ProviderManager();
+                ICrawlerService crawlerService = new CrawlerService();
 
                 if (args.Length > 0)
                 {
@@ -34,23 +35,16 @@ namespace CashBack.Crawler
                 }
                 else
                 {
-                    //Config
-                    string providerIDs = ConfigurationManager.AppSettings["providers"];
-                    string[] providers = providerIDs.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (string p in providers)
+                    IList<CashBack.Data.Provider> providers = crawlerService.GetActiveProviders();
+                    foreach (CashBack.Data.Provider p in providers)
                     {
-                        int id = 0;
-                        if(int.TryParse(p, out id))
+                        
+                        IProvider provider = GetProviderImplementation(p.ProviderID, service);
+                        if (provider != null)
                         {
-                            if (id > 0)
-                            {
-                                IProvider provider = GetProviderImplementation(id, service);
-                                if (provider != null)
-                                {
-                                    manager.Add(provider);
-                                }
-                            }
+                            manager.Add(provider);
                         }
+                            
                     }
 
                     //Execute all providers

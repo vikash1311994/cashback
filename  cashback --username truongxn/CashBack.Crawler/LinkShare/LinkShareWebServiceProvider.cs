@@ -18,6 +18,11 @@ namespace CashBack.Crawler
             : base(new CatalogService())
         { }
 
+        public override void UpdateProvider()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void Execute()
         {
         }

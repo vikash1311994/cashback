@@ -25,6 +25,7 @@ namespace CashBack.Crawler
         }
 
         public abstract void Execute();
+        public abstract void UpdateProvider();
     }
 
     public interface IProviderManager

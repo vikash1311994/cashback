@@ -18,5 +18,10 @@ namespace CashBack.Crawler.CommissionJunction
         {
             throw new NotImplementedException();
         }
+
+        public override void UpdateProvider()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

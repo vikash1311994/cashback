@@ -5,6 +5,29 @@ using System.Text;
 
 namespace CashBack.Crawler.Model.CJ
 {
+    public static class QueryConstants
+    {
+        public const string WebsiteID = "website-id";
+        public const string Authorization = "authorization";
+        public const string AdvertiserIDs = "advertiser-ids";
+        public const string Keywords = "keywords";
+        public const string ServiceableArea = "serviceable-area";
+        public const string ISBN = "isbn";
+        public const string UPC = "upc";
+        public const string ManufacturerName = "manufacturer-name";
+        public const string ManufacturerSKU = "manufacturer-sku";
+        public const string AdvertiserSKU = "advertiser-sku";
+        public const string LowPrice = "low-price";
+        public const string HighPrice = "high-price";
+        public const string LowSalePrice = "low-sale-price";
+        public const string HighSalePrice = "high-sale-price";
+        public const string Currency = "currency";
+        public const string SortBy = "sort-by";
+        public const string SortOrder = "sort-order";
+        public const string PageNumber = "page-number";
+        public const string RecordsPerPage = "records-per-page";
+    }
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3074")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]

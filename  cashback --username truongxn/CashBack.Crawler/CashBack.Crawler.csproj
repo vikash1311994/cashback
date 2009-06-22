@@ -39,6 +39,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\Microsoft.Http.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ServiceModel.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Microsoft.ServiceModel.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -57,7 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommissionJunction\CommissionJunctionAdvertiserProvidder.cs" />
     <Compile Include="CommissionJunction\CommissionJunctionWebServiceProvider.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="LinkShare\LinkShare.cs" />
     <Compile Include="LinkShare\LinkShareFfpProvider.cs" />
     <Compile Include="LinkShare\LinkShareWebServiceProvider.cs" />

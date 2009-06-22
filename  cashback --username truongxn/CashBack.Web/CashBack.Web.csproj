@@ -69,7 +69,7 @@
   <ItemGroup>
     <Content Include="App_Data\CashBackDB.mdf">
     </Content>
-    <Content Include="App_Data\CashBackDB_log.ldf">
+    <Content Include="App_Data\CashBackDB_log.LDF">
       <DependentUpon>CashBackDB.mdf</DependentUpon>
     </Content>
     <Content Include="Content\Images\bg-message.png" />

@@ -59,7 +59,9 @@
       <DependentUpon>CashBack.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\CatalogRepository.cs" />
+    <Compile Include="DataAccess\CrawlerRepository.cs" />
     <Compile Include="DataAccess\ICatalogRepository.cs" />
+    <Compile Include="DataAccess\ICrawlerRepository.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -35,6 +35,9 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.Entity">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -47,7 +50,15 @@
   <ItemGroup>
     <Compile Include="Catalog\CatalogService.cs" />
     <Compile Include="Catalog\ICatalogService.cs" />
+    <Compile Include="Crawler\CrawlerService.cs" />
+    <Compile Include="Crawler\ICrawlerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CashBack.Data\CashBack.Data.csproj">
+      <Project>{1CD1204B-75D1-45BF-8391-F955EF91757C}</Project>
+      <Name>CashBack.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Coupon\" />
